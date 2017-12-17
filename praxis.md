@@ -2,6 +2,10 @@
 http://ics.p.lodz.pl/~stolarek/_media/pl:research:stolarek_understanding_basic_haskell_error_messages.pdf
 -->
 
+<!--
+Prereqs for this talk are: a working knowledge of GHCi, how types are constructed in Haskell, and what typeclasses are and how they are used.
+-->
+
 ```haskell
 safeHead [a] -> Maybe a
 safeHead [] = Nothing
