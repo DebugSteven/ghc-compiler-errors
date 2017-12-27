@@ -36,7 +36,7 @@ that already productive Haskell users enjoy while there's a lack of
 community/resources to support people trying to learn (kudos to the people that do).
 It's pretty frustrating to learn Haskell and I think the community gets
 a bad reputation for that. I would like to make the barrier to 
-entry less by creating content that excites, sympathisizes with, 
+entry less by creating content that excites, sympathizes with, 
 and helps someone that is just getting started.
 
 Content Relevancy: Haskell beginners and intermediates 
