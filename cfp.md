@@ -1,4 +1,6 @@
-Abstract Title: A Pragmatic Guide to GHC Errors
+Abstract Title: Seriously, the Haskell Type Checker is Your
+Friend: a Pragmatic Approach to Working with GHC Errors
+
 Abstract Topic: Concepts, Cautionary Tales
 Submission Type: Educational Session (50m)
 
