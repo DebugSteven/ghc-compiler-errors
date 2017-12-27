@@ -26,7 +26,7 @@ I will address how to properly identify GHC errors to avoid this.
 My personal motivation for this talk to create more resources
 for beginners. I think that Haskell is powerful because of the the way
 you can concisely express complex code expressions.
-Once you get past the learning curve Haskell can be a very 
+Once you get past the learning curve, Haskell can be a very 
 productive and enjoyable language to use. However, I don't think
 most people that try Haskell ever get to this point currently.
 I don't think that I'm even at this point yet!
