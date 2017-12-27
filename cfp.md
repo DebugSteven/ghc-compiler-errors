@@ -34,9 +34,10 @@ I believe there is a cultural problem (as viewed by beginners)
 within the language that focuses on these cooler topics 
 that already productive Haskell users enjoy while there's a lack of
 community/resources to support people trying to learn (kudos to the people that do).
-I would like to make the barrier to entry less by creating 
-content that excites, sympathisizes with, and helps someone 
-that is just getting started.
+It's pretty frustrating to learn Haskell and I think the community gets
+a bad reputation for that. I would like to make the barrier to 
+entry less by creating content that excites, sympathisizes with, 
+and helps someone that is just getting started.
 
 Content Relevancy: Haskell beginners and intermediates 
 (but not neophytes) attending this talk will be able to 
