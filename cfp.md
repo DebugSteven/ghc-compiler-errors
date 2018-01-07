@@ -56,8 +56,8 @@ through examples of common beginner mistakes.
 The presentation will show how beginner errors can compound 
 and lead them to misinterpret the problem. 
 It will show attendees these errors are difficult to figure out,
-but that they have all the tools to figure out their code mistakes and
-with a little practice, they'll be explaining errors to new beginners.
+but that they have all the tools to figure out their code mistakes. 
+With a little practice, they'll be explaining errors to new beginners.
 
 
 Content Relevancy: Haskell beginners and intermediates 
