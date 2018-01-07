@@ -39,7 +39,7 @@ a bad reputation for that. I would like to make the barrier to
 entry less by creating content that excites, sympathizes with, 
 and helps someone that is just getting started.
 
-A topic essential to becoming productive in Haskell
+An essential topic to becoming productive in Haskell
 is identifying and resolving error messages in GHC. Error messages can
 be cryptic and hard to overcome when you are a beginner. Often times
 it's helpful when you have someone walk you through
@@ -54,9 +54,7 @@ Additionally, I will do some live coding to show which compiler errors
 we get in GHCi. Code examples will iterate
 through examples of common beginner mistakes. 
 The presentation will show how beginner errors can compound 
-and lead them to misinterpret the problem. Beginners 
-will benefit from having another documented resource 
-to look at for solving GHC type errors after the presentation.
+and lead them to misinterpret the problem. 
 It will show attendees these errors are difficult to figure out,
 but that they have all the tools to figure out their code mistakes and
 with a little practice, they'll be explaining errors to new beginners.
