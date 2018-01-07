@@ -59,6 +59,9 @@ It will show attendees these errors are difficult to figure out,
 but that they have all the tools to figure out their code mistakes. 
 With a little practice, they'll be explaining errors to new beginners.
 
+- reword paragraph above
+- what version of GHC will the talk use?
+
 
 Content Relevancy: Haskell beginners and intermediates 
 (but not neophytes) attending this talk will be able to 
