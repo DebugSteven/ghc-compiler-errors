@@ -54,12 +54,14 @@ Additionally, I will do some live coding to show which compiler errors
 we get in GHCi. Code examples will show errors and iterate
 through examples of common beginner mistakes. 
 The presentation will show how beginner errors can compound 
-and lead them to misinterpret the problem. Additionally,
-beginners will benefit from having another documented resource 
+and lead them to misinterpret the problem. Beginners 
+will benefit from having another documented resource 
 to look at for solving GHC type errors after the presentation.
 This is make the barrier to using Haskell and other functional
-languages less by creating content that a beginner can interact with
-and learn practical knowledge from during and after the talk.
+languages less by creating content that a beginner can interact with.
+It will show attendees these errors are difficult to figure out,
+but that they have all the tools to figure out their code mistakes and
+with a little practice, they'll be explaining errors to new beginners.
 
 
 Content Relevancy: Haskell beginners and intermediates 
