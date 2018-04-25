@@ -512,6 +512,7 @@ Ok, one module loaded.
 
 ---
 
+#### Properly formatted file!
 ```haskell
 module Main where
 
