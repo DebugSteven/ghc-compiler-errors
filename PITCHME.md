@@ -64,7 +64,7 @@ let lie =
 
 +++
 
-#### error #1
+#### Error #1
 ``` 
 [1 of 1] Compiling Main             ( format.hs, interpreted )
 
@@ -142,7 +142,7 @@ let lie =
 
 +++
 
-#### error #2
+#### Error #2
 ```
 [1 of 1] Compiling Main             ( format.hs, interpreted )
 
@@ -188,12 +188,12 @@ let lie =
  <li> New code blocks inside of other functions must be 1 space over to denote a new block </li>
  <li> For readability, may I recommend 2 spaces </li>
 </ol>
-<!--
+
+Note:
 My most common one is not having enough spaces between my function name 
 and on the next line my implementation. You need to have the 
 implementation 1 space over on the next line compared to the function name. 
 This rule applies for let expressions, case of expressions, guards, & in where blocks!
--->
 
 +++
 
@@ -221,7 +221,7 @@ let lie =
 
 +++
 
-#### error #3
+#### Error #3
 ```
 [1 of 1] Compiling Main             ( format.hs, interpreted )
 
@@ -288,7 +288,7 @@ lie =
 
 +++
 
-#### error #4
+#### Error #4
 ```
 [1 of 1] Compiling Main             ( format.hs, interpreted )
 
@@ -323,7 +323,7 @@ rulebreaker b =
 lie = 
  "this code will compile fine"
 ```
-@[12-13]()
+@[10-11]()
 
 +++
 
@@ -357,7 +357,7 @@ lie =
 
 +++
 
-#### error #5
+#### Error #5
 ```
 [1 of 1] Compiling Main             ( format.hs, interpreted )
 
@@ -392,7 +392,7 @@ ruleBreaker b =
 lie = 
  "this code will compile fine"
 ```
-@[1, 9-10]()
+@[1, 7-8]()
 
 +++
 
@@ -427,7 +427,7 @@ lie =
 ```
 
 +++
-#### error #6
+#### Error #6
 ```
 [1 of 1] Compiling Main             ( format.hs, interpreted )
 
@@ -471,16 +471,20 @@ ruleBreaker b =
 lie = 
  "this code will compile fine"
 ```
-@[5-6]()
+@[7-8]()
 
 +++
 
-### main :: IO ()
-`main` always, always, always returns `IO ()`
+### main :: IO Type
+`main` always, always, always returns `IO` of some type.
+Usually we return `IO ()`
+
+Note: In our main function we use print.
+print has the type a to IO (). So we know we'll want to return IO ()
 
 +++
 
-#### IO () & main, together forever
+#### IO & main, together forever
 ```haskell
 module Main where
 
