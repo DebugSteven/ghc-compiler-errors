@@ -111,14 +111,13 @@ let lie =
 <li> Language extensions & imported modules listed before functions </li>
 </ol>
 
-<!--
+Note:
 If you decide to give your file a module name,
 it must be the top line in your file, with a capitalized name.
 I personally like to then have my language extensions or pragmas next &
 I like to have LANGUAGE in all uppercase. Then I list modules I would like
 to import into my file. Language extensions & importing modules must come
 before your functions.
--->
 
 +++
 
