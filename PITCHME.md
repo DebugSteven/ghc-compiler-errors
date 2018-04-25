@@ -545,3 +545,27 @@ ruleBreaker b =
 lie = 
  "this code won't compile fine"
 ```
+
+---
+
+### Type Mismatch
+
+---
+
+### Cascading Type Mismatch
+
+---
+
+### Module Or Define
+
+---
+
+### Missing Typeclass Constraint
+
+---
+
+### Believe In Yourself
+
+---
+
+### Thank You!
