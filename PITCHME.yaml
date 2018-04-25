@@ -1,6 +1,7 @@
 .reveal pre code {
   font-size: 1.3em;
   line-height: 1.2;
+  max-height: 500px;
 }
 
 .reveal pre {
