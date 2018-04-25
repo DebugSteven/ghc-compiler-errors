@@ -178,6 +178,10 @@ let lie =
 
 @[13-18]()
 
+Note: The error is on the line that starts with False.
+But this entire code block has a similar problem.
+So keep in mind the where block and the let for the rules we discuss next.
+
 +++
 
 #### Indentation Rules
@@ -252,13 +256,15 @@ rulebreaker b =
 let lie = 
      "this code will compile fine"
 ```
-@[19-20]()
+@[17-18]()
 
 +++
 
 #### Functions are Top Level Declarations
 `let` and `where` are meant to define functions
-inside other functions with a local scope.
+inside other functions within a local scope.
+
+
 Just a function name at the top level will be fine!
 
 +++
