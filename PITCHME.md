@@ -146,7 +146,7 @@ let lie =
 ```
 [1 of 1] Compiling Main             ( format.hs, interpreted )
 
-format.hs:16:13: error: parse error on input ‘->’
+format.hs:14:13: error: parse error on input ‘->’
    |
 16 |       False -> "no broken rules here... " ++ truth
    |             ^^
@@ -229,7 +229,7 @@ let lie =
 ```
 [1 of 1] Compiling Main             ( format.hs, interpreted )
 
-format.hs:21:1: error:
+format.hs:19:1: error:
     parse error (possibly incorrect indentation or mismatched brackets)
 Failed, no modules loaded.
 ```
@@ -298,8 +298,9 @@ lie =
 ```
 [1 of 1] Compiling Main             ( format.hs, interpreted )
 
-format.hs:12:1: error:
-    The type signature for ‘ruleBreaker’ lacks an accompanying binding
+format.hs:10:1: error:
+    The type signature for ‘ruleBreaker’ lacks an 
+    accompanying binding
    |
 12 | ruleBreaker :: Bool -> String
    | ^^^^^^^^^^^
@@ -437,7 +438,7 @@ lie =
 ```
 [1 of 1] Compiling Main             ( format.hs, interpreted )
 
-format.hs:10:1: error:
+format.hs:8:1: error:
     • Couldn't match expected type ‘IO t0’ with actual type ‘Int’
     • In the expression: main
       When checking the type of the IO action ‘main’
@@ -445,7 +446,7 @@ format.hs:10:1: error:
 10 | main = print "hello world"
    | ^
 
-format.hs:10:8: error:
+format.hs:8:8: error:
     • Couldn't match expected type ‘Int’ with actual type ‘IO ()’
     • In the expression: print "hello world"
       In an equation for ‘main’: main = print "hello world"
