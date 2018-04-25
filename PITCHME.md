@@ -48,8 +48,6 @@ import Control.Applicative
 
 module Main where
 
-someFunc = print "hey"
-
 mymain :: Int
 mymain = print "hello world"
 
@@ -66,6 +64,7 @@ let lie =
 
 +++
 
+#### error #1
 ``` 
 [1 of 1] Compiling Main             ( format.hs, interpreted )
 
@@ -84,8 +83,6 @@ Failed, no modules loaded.
 import Control.Applicative
 
 module Main where
-
-someFunc = print "hey"
 
 mymain :: Int
 mymain = print "hello world"
@@ -121,14 +118,13 @@ before your functions.
 
 +++
 
+#### Move module to top
 ```haskell
 module Main where
 
 {-#LANGUAGE InstanceSigs #-}
 
 import Control.Applicative
-
-someFunc = print "hey"
 
 mymain :: Int
 mymain = print "hello world"
@@ -146,6 +142,7 @@ let lie =
 
 +++
 
+#### error #2
 ```
 [1 of 1] Compiling Main             ( format.hs, interpreted )
 
@@ -164,8 +161,6 @@ module Main where
 {-#LANGUAGE InstanceSigs #-}
 
 import Control.Applicative
-
-someFunc = print "hey"
 
 mymain :: Int
 mymain = print "hello world"
@@ -202,14 +197,13 @@ This rule applies for let expressions, case of expressions, guards, & in where b
 
 +++
 
+#### Indent our case, where block, & let expression
 ```haskell
 module Main where
 
 {-#LANGUAGE InstanceSigs #-}
 
 import Control.Applicative
-
-someFunc = print "hey"
 
 mymain :: Int
 mymain = print "hello world"
@@ -227,6 +221,7 @@ let lie =
 
 +++
 
+#### error #3
 ```
 [1 of 1] Compiling Main             ( format.hs, interpreted )
 
@@ -243,8 +238,6 @@ module Main where
 {-#LANGUAGE InstanceSigs #-}
 
 import Control.Applicative
-
-someFunc = print "hey"
 
 mymain :: Int
 mymain = print "hello world"
@@ -270,14 +263,13 @@ Just a function name at the top level will be fine!
 
 +++
 
+#### Functions at The Top Level
 ```haskell
 module Main where
 
 {-#LANGUAGE InstanceSigs #-}
 
 import Control.Applicative
-
-someFunc = print "hey"
 
 mymain :: Int
 mymain = print "hello world"
@@ -296,6 +288,7 @@ lie =
 
 +++
 
+#### error #4
 ```
 [1 of 1] Compiling Main             ( format.hs, interpreted )
 
@@ -316,8 +309,6 @@ module Main where
 
 import Control.Applicative
 
-someFunc = print "hey"
-
 mymain :: Int
 mymain = print "hello world"
 
@@ -336,19 +327,18 @@ lie =
 
 +++
 
-#### If you have a type signature
+#### If you have a type signature,
 #### you must have a function implementation with it
 
 +++
 
+#### Type signatures for functions that exist
 ```haskell
 module Main where
 
 {-#LANGUAGE InstanceSigs #-}
 
 import Control.Applicative
-
-someFunc = print "hey"
 
 mymain :: Int
 mymain = print "hello world"
@@ -367,6 +357,7 @@ lie =
 
 +++
 
+#### error #5
 ```
 [1 of 1] Compiling Main             ( format.hs, interpreted )
 
@@ -386,8 +377,6 @@ module Main where
 {-#LANGUAGE InstanceSigs #-}
 
 import Control.Applicative
-
-someFunc = print "hey"
 
 mymain :: Int
 mymain = print "hello world"
@@ -414,14 +403,13 @@ If you don't want a `main` function pick a different module name.
 
 +++
 
+#### main for Main
 ```haskell
 module Main where
 
 {-#LANGUAGE InstanceSigs #-}
 
 import Control.Applicative
-
-someFunc = print "hey"
 
 main :: Int
 main = print "hello world"
@@ -439,6 +427,7 @@ lie =
 ```
 
 +++
+#### error #6
 ```
 [1 of 1] Compiling Main             ( format.hs, interpreted )
 
@@ -468,8 +457,6 @@ module Main where
 
 import Control.Applicative
 
-someFunc = print "hey"
-
 main :: Int
 main = print "hello world"
 
@@ -489,17 +476,17 @@ lie =
 +++
 
 ### main :: IO ()
+`main` always, always, always returns `IO ()`
 
 +++
 
+#### IO () & main, together forever
 ```haskell
 module Main where
 
 {-#LANGUAGE InstanceSigs #-}
 
 import Control.Applicative
-
-someFunc = print "hey"
 
 main :: IO ()
 main = print "hello world"
@@ -531,8 +518,6 @@ module Main where
 {-#LANGUAGE InstanceSigs #-}
 
 import Control.Applicative
-
-someFunc = print "hey"
 
 main :: IO ()
 main = print "hello world"
