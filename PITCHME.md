@@ -5,6 +5,9 @@
 #### by J Haigh
 #### @DebugSteven
 
+Note:
+Hi I’m J (& I’m DebugSteven on Twitter if you’d like to follow me there) and over the last year I’ve become friends with the Glorious Glasgow Haskell Compilation System. For this presentation I’ll be using GHC version 8.2.2. I started self studying Haskell after I completed my bachelor’s in Computer Science last year and I started a Haskell Book Club here in Denver in August. We have worked through almost the entire book at this point. I’ve struggled along with my fellow attendees to get my Haskell code working, which means reading the error messages and trying to figure out what they mean. Working with the Haskell compiler errors can be really difficult, because Haskell very different from most other languages people are used to. But if you practice like we’ll do today, you’ll be able to do it! and I’m hoping by the end of this talk you’ll have a better understanding of GHC’s errors!  
+
 ---
 
 #### Lovely Haskell Types & What They Look Like
@@ -18,11 +21,18 @@ type String   = [Char]
 data (,) a b  = (,) a b
 data [] a     = [] | a : [a]
 ```
+
+Note:
+My experience of other programming languages, (& maybe you can relate) is quickly typing out what I want my program to do. Usually getting an error because I don’t get things right on the first try. & whether it’s a typo, syntax error, invalid memory access, logic errors that make my code crash, I go check out the error. I immediately jump to the line number the error message told me if there is one. I’ll put in print statements to see what I’m really getting & go from there to try to make it work. In Haskell though, since we have types, like Bool, Int, String, so on (& we aren’t putting undefined all over our program) we have greater confidence about what we will get out of our functions. The type signatures on our functions can help guide us to correct code & GHC will use the types to help point out where we’ve gone wrong too.
+
 ---
 
 #### GHC Referee
 ![ref](referee.png)
 <span style="font-size: 0.5em;">Drawing by [Lee Baillie](https://twitter.com/_lbaillie)</span>
+
+Note:
+However the trade off for that confidence we get with strong and static types is a picky, rule oriented compiler. You’re going to spend a little more time upfront trying to figure out how to fix compiler errors. GHC isn’t going to let you pull any fast ones. I like to think of GHC as a referee. They will tell you where the error occurred, what rule you broke & what was expected by the compiler. This is super helpful. You can read that error & then fix your code to adhere to the rules! 
 
 ---
 
@@ -31,6 +41,11 @@ data [] a     = [] | a : [a]
 <li> Parse Errors </li>
 <li> Type Errors </li>
 </ol>
+
+Note:
+Parse errors are when we have broken a formatting rule.
+Type errors are when we told the compiler we would do something via our types
+and we haven't followed through.
 
 ---
 
@@ -828,8 +843,7 @@ We’ve gone over a lot of errors today, but there’s one thing we haven’t co
 Getting good at debugging in any new language takes time. For Haskell specifically, 
 I think it can be overwhelming as a beginner because there is so much new stuff you feel 
 you need to learn to be good at it. I’ve gotten significantly better over the last year 
-because I practiced & wrote a lot of code. You don’t necessarily need to know the 
-functions or typeclasses to use them. You just need to find what fits & solves your problem & you'll learn along the way. 
+because I practiced & wrote a lot of code. You don’t necessarily need to know exactly what a function does to use it. You just need to find what fits & solves your problem & you'll learn along the way. 
 If you read the compiler errors like we’ve done today 
 and you use Hoogle to look up the type signature you need, 
 you can play around with it and get it and you will get better at fixing type errors.
