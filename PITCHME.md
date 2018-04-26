@@ -566,7 +566,7 @@ safeHead xs = Maybe head xs
 
 ```
 ghci> :l tmr.hs
-[1 of 1] Compiling Main ( tmr.hs, interpreted )
+[1 of 1] Compiling SafeHead ( tmr.hs, interpreted )
 tmr.hs:3:15: Not in scope: data constructor ‘Maybe’
 Failed, modules loaded: none
 ```
@@ -603,7 +603,7 @@ sortWrapper xs = sort xs
 +++
 
 ```
-[1 of 1] Compiling Main ( tmr.hs, interpreted )
+[1 of 1] Compiling Sort ( tmr.hs, interpreted )
 tmr.hs:3:22:
 Not in scope: ‘sort’
 Perhaps you meant ‘sqrt’ (imported from Prelude)
@@ -638,7 +638,7 @@ safeHead xs = Maybe head xs
 
 ```
 ghci> :r tmr.hs
-[1 of 1] Compiling Main ( tmr.hs, interpreted )
+[1 of 1] Compiling SafeHead ( tmr.hs, interpreted )
 tmr.hs:4:15:
 The function ‘Just’ is applied to two arguments,
 but its type ‘a0 -> Maybe a0’ has only one
