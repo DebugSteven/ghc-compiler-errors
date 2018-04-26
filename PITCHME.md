@@ -777,6 +777,7 @@ eftOrd b e =
   then b : bs
   else []
     where bs = eftOrd (succ b) e
+```
 
 +++
 
