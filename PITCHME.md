@@ -754,6 +754,19 @@ eftOrd b e =
 +++
 
 ```
+λ> :t enumFromTo
+enumFromTo :: Enum a => a -> a -> [a]
+λ> enumFromTo LT GT
+[LT,EQ,GT]
+λ> enumFromTo GT LT
+[]
+λ> :t succ
+succ :: Enum a => a -> a
+```
+
++++
+
+```
 eft.hs:10:12: error:
     • Couldn't match expected type ‘[Ordering]’
                   with actual type ‘Ordering -> [Ordering]’
