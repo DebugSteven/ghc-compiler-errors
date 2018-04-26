@@ -7,12 +7,6 @@
 
 ---
 
-## Now Haskell is my Best Friend
-
-_friendship ending with other languages not required_
-
----
-
 #### Lovely Haskell Types & What They Look Like
 
 ```haskell
