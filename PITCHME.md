@@ -725,11 +725,98 @@ integerToNat i =
 
 +++
 
----
+#### EnumFromTo Ordering
 
-### Missing Typeclass Constraint
+```haskell
+eftOrd :: Ordering -> Ordering -> [Ordering]
+eftOrd b e = 
+  if b <= e
+  then b : bs
+  else []
+    where bs = eftOrd (succ b) 
+```
 
 +++
+
+```
+eft.hs:10:12: error:
+    • Couldn't match expected type ‘[Ordering]’
+                  with actual type ‘Ordering -> [Ordering]’
+    • Probable cause: ‘bs’ is applied to too few arguments
+      In the second argument of ‘(:)’, namely ‘bs’
+      In the expression: b : bs
+      In the expression: if b <= e then b : bs else []
+   |
+10 |   then b : bs
+   |            ^^
+```
+
++++
+
+```haskell
+eftOrd :: Ordering -> Ordering -> [Ordering]
+eftOrd b e = 
+  if b <= e
+  then b : bs
+  else []
+    where bs = eftOrd (succ b) 
+```
+@[4,6]()
+Note:
+Why would `bs` expect another argument? Well, what is bs defined to do?
+bs is equal to eftOrd and the next value of b, but eftOrd takes 2 arguments!
+Ahh! So we need to either have the give eftOrd another argument in the definition
+for bs or we need to pass the argument to bs on line 5.
+
++++
+
+```haskell
+eftOrd :: Ordering -> Ordering -> [Ordering]
+eftOrd b e = 
+  if b <= e
+  then b : bs
+  else []
+    where bs = eftOrd (succ b) e
+
++++
+
+```haskell
+eftOrd :: Ordering -> Ordering -> [Ordering]
+eftOrd b e = 
+  if b <= e
+  then b : (bs e)
+  else []
+    where bs = eftOrd (succ b) 
+```
+
++++
+
+```
+λ> eftOrd GT GT
+[GT*** Exception: Prelude.Enum.Ordering.succ: bad argument
+```
+Note:
+You have may noticed that we don't handle all the cases.
+If you didn't notice, neither did I when I first wrote this!
+The types didn't save me from this error! We still have to be careful
+about writing code that can blow up when we run it. 
+
++++
+
+```haskell
+eftOrd :: Ordering -> Ordering -> [Ordering]
+eftOrd b e  
+    | b < e = b : bs
+    | b > e = []
+    | b == e = [e] 
+      where bs = eftOrd (succ b) e
+```
+
+Note:
+I ended up writing this with a guard & you may find that using
+particular control structures for particular problems
+may make more sense to you and be more readable. I find that when
+my code is more readable it's easier to understand my type errors too.
 
 ---
 
