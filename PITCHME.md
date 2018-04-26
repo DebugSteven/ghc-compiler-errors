@@ -21,7 +21,8 @@ data [] a     = [] | a : [a]
 ---
 
 #### GHC Referee
-![ref](compile_meme.jpg)
+![ref](referee.png)
+<span style="font-size: 0.5em;">Drawing by [Lee Baillie](https://twitter.com/_lbaillie)</span>
 
 ---
 
