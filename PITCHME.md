@@ -623,6 +623,8 @@ Failed, modules loaded: none.
 +++
 
 ```haskell
+import Data.Maybe
+
 safeHead :: [a] -> Maybe a
 safeHead [] = Nothing
 safeHead xs = Just (head xs)
