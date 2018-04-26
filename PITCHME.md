@@ -27,7 +27,7 @@ data [] a     = [] | a : [a]
 ---
 
 #### GHC Referee
-put a picture here
+[ref](https://github.com/DebugSteven/jhaigh-cfp-2018/blob/master/compile_meme.jpg)
 
 ---
 
@@ -638,7 +638,7 @@ safeHead xs = Just (head xs)
 
 ---
 
-### Too Many or Not Enough Arguments
+### Not Enough Arguments
 
 +++
 
