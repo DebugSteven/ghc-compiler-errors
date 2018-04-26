@@ -612,7 +612,7 @@ safeHead xs = Maybe head xs
 ```
 ghci> :r tmr.hs
 [1 of 1] Compiling Main ( tmr.hs, interpreted )
-tmr.hs:3:15:
+tmr.hs:4:15:
 The function ‘Just’ is applied to two arguments,
 but its type ‘a0 -> Maybe a0’ has only one
 In the expression: Just head xs
