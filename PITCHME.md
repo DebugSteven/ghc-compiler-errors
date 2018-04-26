@@ -756,6 +756,8 @@ eftOrd b e =
 ```
 λ> :t enumFromTo
 enumFromTo :: Enum a => a -> a -> [a]
+λ> :i Ordering 
+data Ordering = LT | EQ | GT
 λ> enumFromTo LT GT
 [LT,EQ,GT]
 λ> enumFromTo GT LT
