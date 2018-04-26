@@ -142,7 +142,7 @@ let lie =
 
 format.hs:14:13: error: parse error on input ‘->’
    |
-16 |       False -> "no broken rules here... " ++ truth
+14 |       False -> "no broken rules here... " ++ truth
    |             ^^
 Failed, no modules loaded.
 ```
@@ -296,7 +296,7 @@ format.hs:10:1: error:
     The type signature for ‘ruleBreaker’ lacks an 
     accompanying binding
    |
-12 | ruleBreaker :: Bool -> String
+10 | ruleBreaker :: Bool -> String
    | ^^^^^^^^^^^
 Failed, no modules loaded.
 ```
@@ -437,7 +437,7 @@ format.hs:8:1: error:
     • In the expression: main
       When checking the type of the IO action ‘main’
    |
-10 | main = print "hello world"
+ 8 | main = print "hello world"
    | ^
 
 format.hs:8:8: error:
@@ -445,7 +445,7 @@ format.hs:8:8: error:
     • In the expression: print "hello world"
       In an equation for ‘main’: main = print "hello world"
    |
-10 | main = print "hello world"
+ 8 | main = print "hello world"
    |        ^^^^^^^^^^^^^^^^^^^
 Failed, no modules loaded.
 ``` 
