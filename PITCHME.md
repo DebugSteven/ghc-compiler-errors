@@ -27,7 +27,7 @@ data [] a     = [] | a : [a]
 ---
 
 #### GHC Referee
-![ref](https://github.com/DebugSteven/jhaigh-cfp-2018/blob/master/compile_meme.jpg)
+![ref](compile_meme.jpg)
 
 ---
 
