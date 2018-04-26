@@ -588,6 +588,38 @@ safeHead [] = Nothing
 safeHead xs = Maybe head xs
 ```
 
++++
+
+### Another Example
+
++++
+
+```haskell
+module Sort where
+
+sortWrapper xs = sort xs
+```
+
++++
+
+```
+[1 of 1] Compiling Main ( tmr.hs, interpreted )
+tmr.hs:3:22:
+Not in scope: ‘sort’
+Perhaps you meant ‘sqrt’ (imported from Prelude)
+Failed, modules loaded: none.
+```
+
++++
+
+```haskell
+module Sort where
+
+import Data.List (sort)
+
+sortWrapper xs = sort xs
+```
+
 ---
 
 ### Too Many Arguments
@@ -630,6 +662,62 @@ safeHead xs = Just (head xs)
 ### Type Mismatch
 
 +++
+
+```haskell
+data Nat = Zero | Succ Nat deriving (Eq, Show)
+
+integerToNat :: Integer -> Maybe Nat
+integerToNat 0 = Just Zero
+integerToNat 1 = Just (Succ Zero)
+integerToNat i = if i < 0 
+                 then Nothing 
+                 else Just (Succ (integerToNat i-1))
+```
+
++++
+
+```
+Natural.hs:15:35: error:
+    • Couldn't match expected type ‘Nat’ with actual type ‘Maybe Nat’
+    • In the first argument of ‘Succ’, namely ‘(integerToNat i - 1)’
+      In the first argument of ‘Just’, namely
+        ‘(Succ (integerToNat i - 1))’
+      In the expression: Just (Succ (integerToNat i - 1))
+   |
+15 |                  else Just (Succ (integerToNat i-1))
+   |                                   ^^^^^^^^^^^^^^^^
+```
+
++++
+
+#### What Would We Expect That To Do?
+```
+> integerToNat 3
+Just (Succ (Just (Succ (Just (Succ Zero))))
+```
+Note: 
+Is that what we want though? Let's look at the info for Maybe
+
++++
+
+`data Maybe a = Nothing | Just a`
+
+`Just (Succ (Succ (Succ Zero)))`
+
++++
+
+```haskell
+integerToNat :: Integer -> Maybe Nat
+integerToNat 0 = Just Zero
+integerToNat 1 = Just (Succ Zero)
+integerToNat i =
+  case i < 0 of
+    True  -> Nothing 
+    False -> (Just (f i))
+    where f 0 = Zero
+          f 1 = (Succ Zero)
+          f n = (Succ (f(n-1)))
+```
 
 ---
 
