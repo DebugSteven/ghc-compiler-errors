@@ -593,7 +593,7 @@ safeHead [] = Nothing
 safeHead xs = Maybe head xs
 ```
 
-+++
+---
 
 ### Too Many Arguments
 
