@@ -548,23 +548,118 @@ lie =
 
 ---
 
+### Error Messages are Dishes Best Served Statically
+
+Onto Type Errors! 
+
+Note: 
+Assume the code we're looking at is in a file & we're using the REPL to check ourselves as we go!
+
+---
+
+### Module or Define
+
++++
+
+```haskell
+safeHead :: [a] -> Maybe a
+safeHead [] = Nothing
+safeHead xs = Maybe head xs
+```
+
++++
+
+```
+ghci> :l tmr.hs
+[1 of 1] Compiling Main ( tmr.hs, interpreted )
+tmr.hs:3:15: Not in scope: data constructor ‘Maybe’
+Failed, modules loaded: none
+```
+
++++
+
+```
+ghci> :i Maybe
+data Maybe a = Nothing | Just a -- Defined in ‘Data.Maybe’
+```
+
++++
+
+```haskell
+import Data.Maybe
+
+safeHead :: [a] -> Maybe a
+safeHead [] = Nothing
+safeHead xs = Maybe head xs
+```
+
++++
+
+### Too Many Arguments
+
++++
+
+```haskell
+import Data.Maybe
+
+safeHead :: [a] -> Maybe a
+safeHead [] = Nothing
+safeHead xs = Maybe head xs
+```
+
++++
+
+```
+ghci> :r tmr.hs
+[1 of 1] Compiling Main ( tmr.hs, interpreted )
+tmr.hs:3:15:
+The function ‘Just’ is applied to two arguments,
+but its type ‘a0 -> Maybe a0’ has only one
+In the expression: Just head xs
+In an equation for ‘safeHead’: safeHead xs = Just head xs
+Failed, modules loaded: none.
+```
+
++++
+
+```haskell
+safeHead :: [a] -> Maybe a
+safeHead [] = Nothing
+safeHead xs = Just (head xs)
+```
+
+---
+
 ### Type Mismatch
 
----
-
-### Cascading Type Mismatch
++++
 
 ---
 
-### Module Or Define
+### Too Many or Not Enough Arguments
+
++++
 
 ---
 
 ### Missing Typeclass Constraint
 
++++
+
 ---
 
-### Believe In Yourself
+## Believe In Yourself
+
+Note:
+We’ve gone over a lot of errors today, but there’s one thing we haven’t covered. 
+Getting good at debugging in any new language takes time. For Haskell specifically, 
+I think it can be overwhelming as a beginner because there is so much new stuff you feel 
+you need to learn to be good at it. I’ve gotten significantly better over the last year 
+because I practiced & wrote a lot of code. You don’t necessarily need to know the 
+functions or typeclasses to use them. You just need to find what fits & solves your problem & you'll learn along the way. 
+If you read the compiler errors like we’ve done today 
+and you use Hoogle to look up the type signature you need, 
+you can play around with it and get it and you will get better at fixing type errors.
 
 ---
 
