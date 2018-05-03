@@ -6,7 +6,7 @@
 #### @DebugSteven
 
 Note:
-Hi I’m J (& I’m DebugSteven on Twitter if you’d like to follow me there) and over the last year I’ve become friends with the Glorious Glasgow Haskell Compilation System. For this presentation I’ll be using GHC version 8.2.2. I started self studying Haskell after I completed my bachelor’s in Computer Science last year and I started a Haskell Book Club here in Denver in August. We have worked through almost the entire book at this point. I’ve struggled along with my fellow attendees to get my Haskell code working, which means reading the error messages and trying to figure out what they mean. Working with the Haskell compiler errors can be really difficult, because Haskell very different from most other languages people are used to. But if you practice like we’ll do today, you’ll be able to do it! and I’m hoping by the end of this talk you’ll have a better understanding of GHC’s errors!  
+Hi I’m J & I’m DebugSteven on Twitter if you’d like to follow me there. Over the last year I’ve become friends with the Glorious Glasgow Haskell Compilation System. For this presentation, I’ll be using GHC version 8.2.2. I started self studying Haskell after I completed my bachelor’s in Computer Science last year and I started a Haskell Book Club, here in Denver, in August. We have worked through almost the entire book at this point. I’ve struggled along with my fellow attendees to get my Haskell code working, which means reading the error messages and trying to figure out what they mean. Working with the Haskell compiler errors can be really difficult, because Haskell is very different from most other programming languages people are used to. But if you practice, like we’ll do today, you’ll be able to do it! & I’m hoping by the end of this talk you’ll have a better understanding of GHC’s errors!  
 
 ---
 
@@ -23,7 +23,9 @@ data [] a     = [] | a : [a]
 ```
 
 Note:
-My experience of other programming languages, (& maybe you can relate) is quickly typing out what I want my program to do. Usually getting an error because I don’t get things right on the first try. & whether it’s a typo, syntax error, invalid memory access, logic errors that make my code crash, I go check out the error. I immediately jump to the line number the error message told me if there is one. I’ll put in print statements to see what I’m really getting & go from there to try to make it work. In Haskell though, since we have types, like Bool, Int, String, so on (& we aren’t putting undefined all over our program) we have greater confidence about what we will get out of our functions. The type signatures on our functions can help guide us to correct code & GHC will use the types to help point out where we’ve gone wrong too.
+My experience of other programming languages, (& maybe you can relate) is quickly typing out what I want my program to do. Usually getting an error because I don’t get things right on the first try. & whether it’s a typo, syntax error, invalid memory access, logic errors that make my code crash, I go check out the error. I immediately jump to the line number the error message told me, if there is one. I’ll put in print statements to see what I’m really getting & go from there to try to make it work. In Haskell though, since we have types, like Bool, Int, String, & so on (& we aren’t putting undefined all over our program), we have greater confidence about what we will get out of our functions. The type signatures on our functions can help guide us to correct code & GHC will use the types to help point out where we’ve gone wrong too.
+
+Corrections: I'd like to reword this section to better explain the benefits of types. With Haskell, there are some errors I run into much less often than in other languages I use. I get a lot more compiler errors & a lot fewer runtime errors & that's pretty nice.
 
 ---
 
@@ -43,9 +45,9 @@ However the trade off for that confidence we get with strong and static types is
 </ol>
 
 Note:
-Parse errors are when we have broken a formatting rule.
+Parse errors are when we have broken a formatting rule or some convention enforced by the compiler.
 Type errors are when we told the compiler we would do something via our types
-and we haven't followed through.
+and we haven't followed through in our function. Let's take a look at parse errors first. 
 
 ---
 
@@ -72,6 +74,10 @@ let lie =
 "this code will compile fine"
 ```
 
+Note:
+Here we have a file that's breaking some formatting rules. 
+Let's try compiling this & see what error messages we get.
+
 +++
 
 #### Error #1
@@ -84,6 +90,11 @@ format.hs:5:1: error: parse error on input ‘module’
   | ^^^^^^
 Failed, no modules loaded.
 ```
+
+Note:
+Error. Parse error on input module.
+This error occurred on line 5 of our file.
+Let's go look at it.
 
 +++
 
@@ -109,6 +120,9 @@ let lie =
 ```
 @[5]()
 
+Note:
+Here is the line that GHC is pointing us to in the error message.
+
 +++
 
 #### Top Of File
@@ -125,6 +139,13 @@ I personally like to then have my language extensions or pragmas next &
 I like to have LANGUAGE in all uppercase. Then I list modules I would like
 to import into my file. Language extensions & importing modules must come
 before your functions.
+
+Corrections:
+Module doesn't have to be the top line. Pragmas/language extensions can
+come before modules & that's usually how I see it done, but apparently,
+they can be anywhere in the file. :O 
+Imports need to come after module & before functions. 
+I'd like to add some extra pieces of code to illustrate this.
 
 +++
 
@@ -150,6 +171,11 @@ let lie =
 "this code will compile fine"
 ```
 
+Note:
+We can fix the error we got by moving module to the 
+top of the file before our imports and functions.
+Let's reload to see our next error.
+
 +++
 
 #### Error #2
@@ -162,6 +188,11 @@ format.hs:14:13: error: parse error on input ‘->’
    |             ^^
 Failed, no modules loaded.
 ```
+
+Note:
+Error. Parse error on input right arrow.
+It shows us that the error in on line 14.
+Let's go check out the code.
 
 +++
 
@@ -188,7 +219,8 @@ let lie =
 
 @[13-18]()
 
-Note: The error is on the line that starts with False.
+Note: 
+The error is on the line that starts with False, line 14.
 But this entire code block has a similar problem.
 So keep in mind the where block and the let for the rules we discuss next.
 
@@ -208,6 +240,13 @@ My most common one is not having enough spaces between my function name
 and on the next line my implementation. You need to have the 
 implementation 1 space over on the next line compared to the function name. 
 This rule applies for let expressions, case of expressions, guards, & in where blocks!
+
+Corrections:
+I'd like to the indentation rules more clear.
+I think it'd be useful to show correct examples of indentation using
+guards & let in expressions especially. Rule #3 should be specified
+to say that the implementation inside of new code blocks must be
+at least 1 space over & explain when a new code block is started.
 
 +++
 
@@ -232,6 +271,10 @@ rulebreaker b =
 let lie = 
      "this code will compile fine"
 ```
+Note:
+We fixed all our indentation problems by following
+the rules we just talked about! Let's reload the
+file & see where we're at with this file now.
 
 +++
 
@@ -243,6 +286,12 @@ format.hs:19:1: error:
     parse error (possibly incorrect indentation or mismatched brackets)
 Failed, no modules loaded.
 ```
+Note:
+Error. Parse error. Possibly incorrect indentation.
+I know what you're thinking, "you said we fixed all our indentation!"
+I promise I didn't lie.
+This error occurs on line 19 & we don't have a line 19 in our file!
+Let's go look at the end of the file instead.
 
 +++
 
@@ -267,6 +316,9 @@ let lie =
      "this code will compile fine"
 ```
 @[17-18]()
+Note:
+We have the let expression highlighted here.
+Why doesn't this work? Well, let's look at the rule.
 
 +++
 
@@ -276,6 +328,13 @@ inside other functions within a local scope.
 
 
 Just a function name at the top level will be fine!
+
+Note:
+We can't have anything but functions at the top
+level of our file. You might be use to declaring
+things that look like variables using an identifier
+to distinguish it from functions, but in
+Haskell everything is a function!
 
 +++
 
@@ -302,6 +361,9 @@ lie =
  "this code will compile fine"
 ```
 
+Note:
+Let's just get rid of our let here & recompile.
+
 +++
 
 #### Error #4
@@ -316,6 +378,11 @@ format.hs:10:1: error:
    | ^^^^^^^^^^^
 Failed, no modules loaded.
 ```
+
+Note:
+Error. The type signature for ruleBreaker doesn't
+have a function associated with it.
+Let's go look at line 10 of our file.
 
 +++
 
@@ -341,6 +408,18 @@ lie =
  "this code will compile fine"
 ```
 @[10-11]()
+
+Note:
+The type signature & the function name are highlighted
+here. You may notice that we have a typo
+between the 2.
+
+Correction: Most people didn't notice there was a typo
+& squinted at the screen. I'm going to the change
+the typo to be ruleBraker instead or something where
+you can see the spacing isn't right. I think
+lowercase & uppercase typos are more common, but
+misspelling is easier for the audience to see.
 
 +++
 
@@ -371,6 +450,9 @@ ruleBreaker b =
 lie = 
  "this code will compile fine"
 ```
+
+Note:
+Let's fix our typo & reload our code!
 
 +++
 

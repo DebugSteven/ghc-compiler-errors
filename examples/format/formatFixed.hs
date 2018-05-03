@@ -1,6 +1,6 @@
-module Main where
-
 {-#LANGUAGE InstanceSigs #-}
+
+module Main where
 
 import Control.Applicative
 
