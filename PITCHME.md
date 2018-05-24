@@ -64,7 +64,7 @@ mymain :: Int
 mymain = print "hello world"
 
 ruleBreaker :: Bool -> String
-rulebreaker b = 
+rulebraker b = 
   case b of
     True -> "yeah this code doesn't follow the rules"
       False -> "no broken rules here... " ++ truth
@@ -109,7 +109,7 @@ mymain :: Int
 mymain = print "hello world"
 
 ruleBreaker :: Bool -> String
-rulebreaker b = 
+rulebraker b = 
   case b of
     True -> "yeah this code doesn't follow the rules"
       False -> "no broken rules here... " ++ truth
@@ -128,8 +128,9 @@ Here is the line that GHC is pointing us to in the error message.
 #### Top Of File
 
 <ol>
-<li> Module name is declared on top line </li>
-<li> Language extensions & imported modules listed before functions </li>
+<li> Module name is declared above imports & code </li>
+<li> Imported modules listed before functions </li>
+<li> Language extensions by convention are usually listed at the top of the file </li>
 </ol>
 
 Note:
@@ -151,9 +152,9 @@ I'd like to add some extra pieces of code to illustrate this.
 
 #### Move module to top
 ```haskell
-module Main where
-
 {-#LANGUAGE InstanceSigs #-}
+
+module Main where
 
 import Control.Applicative
 
@@ -161,7 +162,7 @@ mymain :: Int
 mymain = print "hello world"
 
 ruleBreaker :: Bool -> String
-rulebreaker b = 
+rulebraker b = 
   case b of
     True -> "yeah this code doesn't follow the rules"
       False -> "no broken rules here... " ++ truth
@@ -197,9 +198,9 @@ Let's go check out the code.
 +++
 
 ```haskell
-module Main where
-
 {-#LANGUAGE InstanceSigs #-}
+
+module Main where
 
 import Control.Applicative
 
@@ -207,7 +208,7 @@ mymain :: Int
 mymain = print "hello world"
 
 ruleBreaker :: Bool -> String
-rulebreaker b = 
+rulebraker b = 
   case b of
     True -> "yeah this code doesn't follow the rules"
       False -> "no broken rules here... " ++ truth
@@ -252,9 +253,9 @@ at least 1 space over & explain when a new code block is started.
 
 #### Indent our case, where block, & let expression
 ```haskell
-module Main where
-
 {-#LANGUAGE InstanceSigs #-}
+
+module Main where
 
 import Control.Applicative
 
@@ -262,7 +263,7 @@ mymain :: Int
 mymain = print "hello world"
 
 ruleBreaker :: Bool -> String
-rulebreaker b = 
+rulebraker b = 
   case b of
     True -> "yeah this code doesn't follow the rules"
     False -> "no broken rules here... " ++ truth
@@ -296,9 +297,9 @@ Let's go look at the end of the file instead.
 +++
 
 ```haskell
-module Main where
-
 {-#LANGUAGE InstanceSigs #-}
+
+module Main where
 
 import Control.Applicative
 
@@ -306,7 +307,7 @@ mymain :: Int
 mymain = print "hello world"
 
 ruleBreaker :: Bool -> String
-rulebreaker b = 
+rulebraker b = 
   case b of
     True -> "yeah this code doesn't follow the rules"
     False -> "no broken rules here... " ++ truth
@@ -340,9 +341,9 @@ Haskell everything is a function!
 
 #### Functions at The Top Level
 ```haskell
-module Main where
-
 {-#LANGUAGE InstanceSigs #-}
+
+module Main where
 
 import Control.Applicative
 
@@ -350,7 +351,7 @@ mymain :: Int
 mymain = print "hello world"
 
 ruleBreaker :: Bool -> String
-rulebreaker b = 
+rulebraker b = 
   case b of
     True -> "yeah this code doesn't follow the rules"
     False -> "no broken rules here... " ++ truth
@@ -387,9 +388,9 @@ Let's go look at line 10 of our file.
 +++
 
 ```haskell
-module Main where
-
 {-#LANGUAGE InstanceSigs #-}
+
+module Main where
 
 import Control.Applicative
 
@@ -397,7 +398,7 @@ mymain :: Int
 mymain = print "hello world"
 
 ruleBreaker :: Bool -> String
-rulebreaker b = 
+rulebraker b = 
   case b of
     True -> "yeah this code doesn't follow the rules"
     False -> "no broken rules here... " ++ truth
@@ -468,12 +469,17 @@ format.hs:1:1: error:
 Failed, no modules loaded.
 ``` 
 
+Note:
+The next error we get here says that the function main
+isn't found in our module Main. Let's look at the code
+and see if that's true.
+
 +++
 
 ```haskell
-module Main where
-
 {-#LANGUAGE InstanceSigs #-}
+
+module Main where
 
 import Control.Applicative
 
@@ -493,6 +499,11 @@ lie =
 ```
 @[1, 7-8]()
 
+Note:
+We have module Main as our top line and we don't have a main
+function anywhere in our file. Instead we have this function
+called mymain.
+
 +++
 
 #### module Main where
@@ -500,13 +511,19 @@ lie =
 
 If you don't want a `main` function pick a different module name.
 
+Note:
+So the rule we're breaking here is that if you use module Main
+you have to have a function called main. If for whatever reason
+you don't want to have a main function, just name your module
+anything else (that starts with a capital letter).
+
 +++
 
 #### main for Main
 ```haskell
-module Main where
-
 {-#LANGUAGE InstanceSigs #-}
+
+module Main where
 
 import Control.Applicative
 
@@ -524,6 +541,10 @@ ruleBreaker b =
 lie = 
  "this code will compile fine"
 ```
+
+Note:
+So we will rename mymain to main & reload our code
+to see how we're doing.
 
 +++
 #### Error #6
@@ -547,12 +568,24 @@ format.hs:8:8: error:
    |        ^^^^^^^^^^^^^^^^^^^
 Failed, no modules loaded.
 ``` 
+
+Note: 
+Really this is 2 errors, but they go really well hand in hand.
+The first error says we couldn't match the expected type of main,
+which is IO of something, with the actual type Int.
+The compiler tells us on the 2nd error that we told them we would
+give them an Int, but we are actually providing an IO of Unit.
+It points to line 8, specifically at the expression: 
+print "hello world". This is expected because the type of print
+is a to IO of Unit where a has the constraint to have an instance of Show.
+Let's go look at those lines.
+
 +++
 
 ```haskell
-module Main where
-
 {-#LANGUAGE InstanceSigs #-}
+
+module Main where
 
 import Control.Applicative
 
@@ -572,22 +605,31 @@ lie =
 ```
 @[7-8]()
 
+Note:
+We did in fact say we would return an Int here
+& we aren't doing it.
+
 +++
 
 ### main :: IO Type
-`main` always, always, always returns `IO` of some type.
+`main` always returns `IO` of some type.
 Usually we return `IO ()`
 
 Note: In our main function we use print.
 print has the type a to IO (). So we know we'll want to return IO ()
 
+Note:
+The rule to use function main is that main must return IO of some type.
+It doesn't have to be IO (), but print has the return type of IO ().
+Let's change our type signature of main to IO ().
+
 +++
 
 #### IO & main, together forever
 ```haskell
-module Main where
-
 {-#LANGUAGE InstanceSigs #-}
+
+module Main where
 
 import Control.Applicative
 
@@ -606,6 +648,10 @@ lie =
  "this code will compile fine"
 ```
 
+Note:
+Here we are, main has the type IO of Unit, which reflects
+the type that print "hello world" gives us. Let's reload.
+
 +++
 
 ```
@@ -613,13 +659,18 @@ lie =
 Ok, one module loaded.
 ```
 
+Note:
+Sweet! Our file is properly formatted now!
+There are no more errors in our code & this will run fine.
+So... just one more thing. :)
+
 ---
 
 #### Properly formatted file!
 ```haskell
-module Main where
-
 {-#LANGUAGE InstanceSigs #-}
+
+module Main where
 
 import Control.Applicative
 
@@ -638,6 +689,11 @@ lie =
  "this code won't compile fine"
 ```
 
+Note:
+Let's change the strings to reflect our code compiling haha.
+You can flip back to look at the previous file & compare it
+to our fixed file!
+
 ---
 
 ### Error Messages are Dishes Best Served Statically
@@ -645,11 +701,15 @@ lie =
 Onto Type Errors! 
 
 Note: 
-Assume the code we're looking at is in a file & we're using the REPL to check ourselves as we go!
+Assume the code we're looking at is in a file & we don't have the implicit prelude.
+We'll using the REPL to check ourselves as we go!
 
 ---
 
 ### Module or Define
+Note:
+The first error we will look at is when you need to define or bring in a module
+to fix a function not being in scope.
 
 +++
 
@@ -659,14 +719,26 @@ safeHead [] = Nothing
 safeHead xs = Maybe head xs
 ```
 
+Note:
+Here we've defined a safe version of the head function.
+Our `safeHead` function should handle the case of an empty list,
+by returning `Nothing` instead of giving us a runtime exception.
+If we have a list with at least one element we should get back
+one value inside of our wrapper.
+
 +++
 
 ```
 ghci> :l tmr.hs
-[1 of 1] Compiling SafeHead ( tmr.hs, interpreted )
-tmr.hs:3:15: Not in scope: data constructor ‘Maybe’
-Failed, modules loaded: none
+tmr.hs:1:20: error: Not in scope: type constructor or class ‘Maybe’
+  |
+1 | safeHead :: [a] -> Maybe a
+  |                    ^^^^^
+Failed, no modules loaded.
 ```
+Note:
+When we compile this we've get an error that the data
+constructor `Maybe` isn't in scope.
 
 +++
 
@@ -674,69 +746,81 @@ Failed, modules loaded: none
 ghci> :i Maybe
 data Maybe a = Nothing | Just a -- Defined in ‘Data.Maybe’
 ```
+Note:
+Data.Maybe is part of the prelude so if you haven't turned that off you won't
+get an error for Maybe not being defined overall. However, let's read this 
+data declaration.
+data, `Maybe a` is a type constructor that takes one type argument and
+the possible values of `Maybe` are the data constructors `Nothing`
+and `Just a` where `a` is some type. So in our function, if we gave `safeHead` a 
+list of `Int`, the type of `a` would be an `Int`.
 
 +++
 
 ```haskell
 import Data.Maybe
+import Data.List
 
 safeHead :: [a] -> Maybe a
 safeHead [] = Nothing
 safeHead xs = Maybe head xs
 ```
+Note:
+We can fix the errors we get by importing the module that defines the type constructor
+`Maybe` & changing our last line to use the defined data constructor `Just` because
+we only use type constructors in our type signatures & we only use data constructors
+in our functions.
+
+We still have an error left in this example, but we'll come back to it after we look
+at one more example of this kind of error.
+
+Corrections:
+I accidentally left `Maybe` in the last line when I should've changed it to `Just`.
+(I fixed it here because I'd like to give this talk again soon.)
+There should also be a section talking about using the type constructor instead
+of the data constructor as an error because that's what the first error was.
+Not having the type constructor Maybe in scope is a different error.
 
 +++
 
-### Another Example
+### Data Constructors & Type Constructors
+
++++
+
+```
+λ> :r
+[1 of 1] Compiling Main             ( tmr.hs, interpreted )
+tmr.hs:6:15: error:
+    • Data constructor not in scope:
+        Maybe :: ([a0] -> a0) -> [a] -> Maybe a
+    • Perhaps you meant variable ‘maybe’ (imported from Data.Maybe)
+  |
+6 | safeHead xs = Maybe head xs
+  |               ^^^^^
+Failed, no modules loaded.
+```
 
 +++
 
 ```haskell
-module Sort where
+import Data.Maybe
+import Data.List
 
-sortWrapper xs = sort xs
+safeHead :: [a] -> Maybe a
+safeHead [] = Nothing
+safeHead xs = Just head xs
 ```
 
 +++
-
-```
-[1 of 1] Compiling Sort ( tmr.hs, interpreted )
-tmr.hs:3:22:
-Not in scope: ‘sort’
-Perhaps you meant ‘sqrt’ (imported from Prelude)
-Failed, modules loaded: none.
-```
-
-+++
-
-```haskell
-module Sort where
-
-import Data.List (sort)
-
-sortWrapper xs = sort xs
-```
-
----
 
 ### Too Many Arguments
-
-+++
-
-```haskell
-import Data.Maybe
-
-safeHead :: [a] -> Maybe a
-safeHead [] = Nothing
-safeHead xs = Maybe head xs
-```
 
 +++
 
 ```
 ghci> :r tmr.hs
 [1 of 1] Compiling SafeHead ( tmr.hs, interpreted )
-tmr.hs:4:15:
+tmr.hs:6:15:
 The function ‘Just’ is applied to two arguments,
 but its type ‘a0 -> Maybe a0’ has only one
 In the expression: Just head xs
@@ -748,11 +832,67 @@ Failed, modules loaded: none.
 
 ```haskell
 import Data.Maybe
+import Data.List
 
 safeHead :: [a] -> Maybe a
 safeHead [] = Nothing
 safeHead xs = Just (head xs)
 ```
+
+---
+
+### Another Example of Imports
+Note:
+Let's take a look at another function.
+This example has the prelude imported.
+
++++
+
+```haskell
+module Sort where
+
+sortWrapper xs = sort xs
+```
+
+Note:
+We have a function called sortWrapper that takes one argument called
+`xs` & we just want to sort it. `xs` is a list of some type that can be ordered.
+Let's compile this.
+
+Correction:
+I'd like to show the type signature for sort.
+
++++
+
+```
+[1 of 1] Compiling Sort ( tmr.hs, interpreted )
+tmr.hs:3:22:
+Not in scope: ‘sort’
+Perhaps you meant ‘sqrt’ (imported from Prelude)
+Failed, modules loaded: none.
+```
+Note:
+We get an error that says the function sort used on line 3 isn't in scope.
+GHC even suggests the closest named function that we have in scope called
+`sqrt`. But that isn't what we're looking for. We can use Hoogle to figure
+out what module this function is defined though!
+
+(This might be a thing I demo.)
+
++++
+
+```haskell
+module Sort where
+
+import Data.List (sort)
+
+sortWrapper xs = sort xs
+```
+
+Note:
+We can see that `sort` is defined in `Data.List` & we can just import
+that one function by listing it in parentheses after our module name.
+This will work. :)
 
 ---
 
@@ -805,8 +945,6 @@ Is that what we want though? Let's look at the info for Maybe
 
 ```haskell
 integerToNat :: Integer -> Maybe Nat
-integerToNat 0 = Just Zero
-integerToNat 1 = Just (Succ Zero)
 integerToNat i =
   case i < 0 of
     True  -> Nothing 
