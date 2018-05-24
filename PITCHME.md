@@ -431,9 +431,9 @@ misspelling is easier for the audience to see.
 
 #### Type signatures for functions that exist
 ```haskell
-module Main where
-
 {-#LANGUAGE InstanceSigs #-}
+
+module Main where
 
 import Control.Applicative
 
@@ -618,7 +618,6 @@ Usually we return `IO ()`
 Note: In our main function we use print.
 print has the type a to IO (). So we know we'll want to return IO ()
 
-Note:
 The rule to use function main is that main must return IO of some type.
 It doesn't have to be IO (), but print has the return type of IO ().
 Let's change our type signature of main to IO ().
