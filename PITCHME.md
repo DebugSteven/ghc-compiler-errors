@@ -23,9 +23,7 @@ data [] a     = [] | a : [a]
 ```
 
 Note:
-My experience of other programming languages, (& maybe you can relate) is quickly typing out what I want my program to do. Usually getting an error because I don’t get things right on the first try. & whether it’s a typo, syntax error, invalid memory access, logic errors that make my code crash, I go check out the error. I immediately jump to the line number the error message told me, if there is one. I’ll put in print statements to see what I’m really getting & go from there to try to make it work. In Haskell though, since we have types, like Bool, Int, String, & so on (& we aren’t putting undefined all over our program), we have greater confidence about what we will get out of our functions. The type signatures on our functions can help guide us to correct code & GHC will use the types to help point out where we’ve gone wrong too.
-
-Corrections: I'd like to reword this section to better explain the benefits of types. With Haskell, there are some errors I run into much less often than in other languages I use. I get a lot more compiler errors & a lot fewer runtime errors & that's pretty nice.
+Most of the errors we occur when we program are type errors. These type errors can manifest in different ways. In dynamic languages for example, it's with runtimes errors. One of your most useful tools in that instance is peppering your program with print statements to figure out where the error is occuring & why. That's not really efficient though & there are several drawbacks. You can forget about your print statements later on. It's a slow feedback loop to figure out why your program isn't working. & it's subject to user error. In Haskell though, since we have types, like Bool, Int, String, & so on (& we aren’t putting undefined all over our program), we have greater confidence about what we will get out of our functions. The type signatures on our functions can help guide us to correct code & GHC will use the types to help point out where we’ve gone wrong too.
 
 ---
 
@@ -34,7 +32,7 @@ Corrections: I'd like to reword this section to better explain the benefits of t
 <span style="font-size: 0.5em;">Drawing by [Lee Baillie](https://twitter.com/_lbaillie)</span>
 
 Note:
-However the trade off for that confidence we get with strong and static types is a picky, rule oriented compiler. You’re going to spend a little more time upfront trying to figure out how to fix compiler errors. GHC isn’t going to let you pull any fast ones. I like to think of GHC as a referee. They will tell you where the error occurred, what rule you broke & what was expected by the compiler. This is super helpful. You can read that error & then fix your code to adhere to the rules! 
+However the trade off for that confidence we get with strong and static types is a picky, rule oriented compiler. You’re going to spend a little more time upfront trying to figure out how to fix compiler errors. This, in my opinion, is significantly better than spending your time trying to fix type errors after they're discovered at runtime. I like to think of GHC as a referee. They will tell you where the error occurred, what rule you broke & what was expected by the compiler. This is super helpful. You can read that error & then fix your code to adhere to the rules! 
 
 ---
 
@@ -54,7 +52,7 @@ and we haven't followed through in our function. Let's take a look at parse erro
 #### Formatting Rules
 
 ```haskell
-{-#LANGUAGE InstanceSigs #-}
+{-# LANGUAGE InstanceSigs #-}
 
 import Control.Applicative
 
@@ -99,7 +97,7 @@ Let's go look at it.
 +++
 
 ```haskell
-{-#LANGUAGE InstanceSigs #-}
+{-# LANGUAGE InstanceSigs #-}
 
 import Control.Applicative
 
@@ -150,9 +148,9 @@ I'd like to add some extra pieces of code to illustrate this.
 
 +++
 
-#### Move module to top
+#### Order Matters
 ```haskell
-{-#LANGUAGE InstanceSigs #-}
+{-# LANGUAGE InstanceSigs #-}
 
 module Main where
 
@@ -198,7 +196,7 @@ Let's go check out the code.
 +++
 
 ```haskell
-{-#LANGUAGE InstanceSigs #-}
+{-# LANGUAGE InstanceSigs #-}
 
 module Main where
 
@@ -251,9 +249,9 @@ at least 1 space over & explain when a new code block is started.
 
 +++
 
-#### Indent our case, where block, & let expression
+#### Indentation Fixed
 ```haskell
-{-#LANGUAGE InstanceSigs #-}
+{-# LANGUAGE InstanceSigs #-}
 
 module Main where
 
@@ -297,7 +295,7 @@ Let's go look at the end of the file instead.
 +++
 
 ```haskell
-{-#LANGUAGE InstanceSigs #-}
+{-# LANGUAGE InstanceSigs #-}
 
 module Main where
 
@@ -341,7 +339,7 @@ Haskell everything is a function!
 
 #### Functions at The Top Level
 ```haskell
-{-#LANGUAGE InstanceSigs #-}
+{-# LANGUAGE InstanceSigs #-}
 
 module Main where
 
@@ -388,7 +386,7 @@ Let's go look at line 10 of our file.
 +++
 
 ```haskell
-{-#LANGUAGE InstanceSigs #-}
+{-# LANGUAGE InstanceSigs #-}
 
 module Main where
 
@@ -415,13 +413,6 @@ The type signature & the function name are highlighted
 here. You may notice that we have a typo
 between the 2.
 
-Correction: Most people didn't notice there was a typo
-& squinted at the screen. I'm going to the change
-the typo to be ruleBraker instead or something where
-you can see the spacing isn't right. I think
-lowercase & uppercase typos are more common, but
-misspelling is easier for the audience to see.
-
 +++
 
 #### If you have a type signature,
@@ -431,7 +422,7 @@ misspelling is easier for the audience to see.
 
 #### Type signatures for functions that exist
 ```haskell
-{-#LANGUAGE InstanceSigs #-}
+{-# LANGUAGE InstanceSigs #-}
 
 module Main where
 
@@ -477,7 +468,7 @@ and see if that's true.
 +++
 
 ```haskell
-{-#LANGUAGE InstanceSigs #-}
+{-# LANGUAGE InstanceSigs #-}
 
 module Main where
 
@@ -497,10 +488,10 @@ ruleBreaker b =
 lie = 
  "this code will compile fine"
 ```
-@[1, 7-8]()
+@[3, 7-8]()
 
 Note:
-We have module Main as our top line and we don't have a main
+We have module Main on line 3 and we don't have a main
 function anywhere in our file. Instead we have this function
 called mymain.
 
@@ -509,7 +500,8 @@ called mymain.
 #### module Main where
 `module Main` must have a `main` function
 
-If you don't want a `main` function pick a different module name.
+If you don't want a `main` function,
+rename your module to anything other than `Main`.
 
 Note:
 So the rule we're breaking here is that if you use module Main
@@ -521,7 +513,7 @@ anything else (that starts with a capital letter).
 
 #### main for Main
 ```haskell
-{-#LANGUAGE InstanceSigs #-}
+{-# LANGUAGE InstanceSigs #-}
 
 module Main where
 
@@ -572,7 +564,7 @@ Failed, no modules loaded.
 Note: 
 Really this is 2 errors, but they go really well hand in hand.
 The first error says we couldn't match the expected type of main,
-which is IO of something, with the actual type Int.
+which is IO of something, with the actual type, in the type signature, Int.
 The compiler tells us on the 2nd error that we told them we would
 give them an Int, but we are actually providing an IO of Unit.
 It points to line 8, specifically at the expression: 
@@ -583,7 +575,7 @@ Let's go look at those lines.
 +++
 
 ```haskell
-{-#LANGUAGE InstanceSigs #-}
+{-# LANGUAGE InstanceSigs #-}
 
 module Main where
 
@@ -613,7 +605,7 @@ We did in fact say we would return an Int here
 
 ### main :: IO Type
 `main` always returns `IO` of some type.
-Usually we return `IO ()`
+Usually main has a return value of `IO ()`
 
 Note: In our main function we use print.
 print has the type a to IO (). So we know we'll want to return IO ()
@@ -626,7 +618,7 @@ Let's change our type signature of main to IO ().
 
 #### IO & main, together forever
 ```haskell
-{-#LANGUAGE InstanceSigs #-}
+{-# LANGUAGE InstanceSigs #-}
 
 module Main where
 
@@ -667,7 +659,7 @@ So... just one more thing. :)
 
 #### Properly formatted file!
 ```haskell
-{-#LANGUAGE InstanceSigs #-}
+{-# LANGUAGE InstanceSigs #-}
 
 module Main where
 
@@ -701,7 +693,7 @@ Onto Type Errors!
 
 Note: 
 Assume the code we're looking at is in a file & we don't have the implicit prelude.
-We'll using the REPL to check ourselves as we go!
+We'll continue using the REPL to check ourselves as we go!
 
 ---
 
@@ -709,6 +701,22 @@ We'll using the REPL to check ourselves as we go!
 Note:
 The first error we will look at is when you need to define or bring in a module
 to fix a function not being in scope.
+
++++
+
+```haskell
+λ> :t head
+head :: [a] -> a
+λ> head []
+*** Exception: Prelude.head: empty list
+```
+
+Note:
+Here is the type signature for `head`.
+Given a list it will give you the first element of the list back.
+However, if you give it an empty list it will blow up.
+Let's try writing an implementation that protects us from
+this exception.
 
 +++
 
@@ -910,6 +918,9 @@ integerToNat i = if i < 0
                  else Just (Succ (integerToNat i-1))
 ```
 
+Note:
+Data declaration for Nat. The deriving part at the end gives us Equality & the ability to print out the constructors for free.
+
 +++
 
 ```
@@ -1084,4 +1095,11 @@ you can play around with it and get it and you will get better at fixing type er
 
 ---
 
-# Thank You!
+## Thank You!
+
+### http://tiny.cc/HBCSignup 
+
+Note: If you're interested in learning Haskell by working through
+Haskell Programming from first prinicples by Chris Allen & Julie Moronuki
+I'm running through this book to the Monad chapter with Pyrrh starting on
+June 18th. The signup & details can be found at this link! Thank you! 
