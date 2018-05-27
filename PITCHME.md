@@ -1097,7 +1097,7 @@ you can play around with it and get it and you will get better at fixing type er
 
 ## Thank You!
 
-### http://tiny.cc/HBCSignup 
+http://tiny.cc/HBCSignup 
 
 Note: If you're interested in learning Haskell by working through
 Haskell Programming from first prinicples by Chris Allen & Julie Moronuki
