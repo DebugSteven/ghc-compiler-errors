@@ -40,7 +40,7 @@ However the trade off for that confidence we get with strong and static types is
 
 #### Oh, The Kinds of Errors You'll See
 
-- Parse Errors
+- Parse Errors |
 - Type Errors |
 
 Note:
@@ -126,7 +126,7 @@ Here is the line that GHC is pointing us to in the error message.
 
 #### Top Of File
 
-- Module name is declared above imports & code 
+- Module name is declared above imports & code | 
 - Imported modules listed before functions |
 - Language extensions by convention are usually listed at the top of the file |
 
@@ -239,7 +239,7 @@ So keep in mind the where block and the let for the rules we discuss next.
 
 #### Indentation Rules
 
-- Code implementations start at least 1 space after the function name on the following line 
+- Code implementations start at least 1 space after the function name on the following line | 
 - Code blocks must spatially align | 
 - New code blocks inside of other functions must be 1 space over to denote a new block |
 - For readability, may I recommend 2 spaces |
