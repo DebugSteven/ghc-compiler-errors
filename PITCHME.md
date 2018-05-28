@@ -6,7 +6,7 @@
 #### @DebugSteven
 
 Note:
-Hi I’m J & I’m DebugSteven on Twitter if you’d like to follow me there. Over the last year I’ve become friends with the Glorious Glasgow Haskell Compilation System. For this presentation, I’ll be using GHC version 8.2.2. I started self studying Haskell after I completed my bachelor’s in Computer Science last year and I started a Haskell Book Club, here in Denver, in August. We have worked through almost the entire book at this point. I’ve struggled along with my fellow attendees to get my Haskell code working, which means reading the error messages and trying to figure out what they mean. Working with the Haskell compiler errors can be really difficult, because Haskell is very different from most other programming languages people are used to. But if you practice, like we’ll do today, you’ll be able to do it! & I’m hoping by the end of this talk you’ll have a better understanding of GHC’s errors!  
+Hi I’m J & I’m DebugSteven on Twitter if you’d like to follow me there. Today I'm going to talk about compiler errors by iterating over code examples & explaining why we get those errors & how to fix them. Over the last year I’ve become friends with the Glorious Glasgow Haskell Compilation System. For this presentation, I’ll be using GHC version 8.2.2. I started self studying Haskell after I completed my bachelor’s in Computer Science last year and I started a Haskell Book Club, here in Denver, in August. We completed the entire book 3 weeks ago. I struggled along with my fellow attendees to get my Haskell code working, which meant reading the error messages & trying to figure out what they mean. Working with the Haskell compiler errors can be really difficult because Haskell is very different from most other programming languages people are used to. But if you practice, like we’ll do today, you’ll be able to do it! & I’m hoping by the end of this talk you’ll have a better understanding of GHC’s errors!  
 
 ---
 
@@ -18,8 +18,10 @@ data Char     = GHC.Types.C# GHC.Prim.Char#
 data Int      = GHC.Types.I# GHC.Prim.Int# 
 data Ordering = LT | EQ | GT
 type String   = [Char]
-data (,) a b  = (,) a b
-data [] a     = [] | a : [a]
+data (,) a b  = (,) a b      -- definition for a tuple
+data [] a     = [] | a : [a] -- definition for a list
+-- (:) is the cons operator & appends an element onto a list
+
 ```
 
 Note:
@@ -37,10 +39,9 @@ However the trade off for that confidence we get with strong and static types is
 ---
 
 #### Oh, The Kinds of Errors You'll See
-<ol>
-<li> Parse Errors </li>
-<li> Type Errors </li>
-</ol>
+
+- Parse Errors
+- Type Errors |
 
 Note:
 Parse errors are when we have broken a formatting rule or some convention enforced by the compiler.
@@ -125,26 +126,37 @@ Here is the line that GHC is pointing us to in the error message.
 
 #### Top Of File
 
-<ol>
-<li> Module name is declared above imports & code </li>
-<li> Imported modules listed before functions </li>
-<li> Language extensions by convention are usually listed at the top of the file </li>
-</ol>
+- Module name is declared above imports & code 
+- Imported modules listed before functions |
+- Language extensions by convention are usually listed at the top of the file |
 
 Note:
 If you decide to give your file a module name,
-it must be the top line in your file, with a capitalized name.
-I personally like to then have my language extensions or pragmas next &
-I like to have LANGUAGE in all uppercase. Then I list modules I would like
-to import into my file. Language extensions & importing modules must come
-before your functions.
+it must be above the imported modules & functions, with a capitalized name.
+Then you list modules you would like to import into your file. 
+Imported modules must come before your functions. 
+Language extensions or pragmas by convention are
+at the top of your file but they can be anywhere in the file & I like
+to have LANGUAGE in all uppercase because I like to yell as much as
+possible in my code.
 
-Corrections:
-Module doesn't have to be the top line. Pragmas/language extensions can
-come before modules & that's usually how I see it done, but apparently,
-they can be anywhere in the file. :O 
-Imports need to come after module & before functions. 
-I'd like to add some extra pieces of code to illustrate this.
++++
+
+#### Fix #1
+```haskell
+{-# LANGUAGE InstanceSigs #-}
+
+module Main where
+
+import Control.Applicative
+
+-- This was our broken version
+-- {-# LANGUAGE InstanceSigs #-}
+-- 
+-- import Control.Applicative
+-- 
+-- module Main where
+```
 
 +++
 
@@ -171,8 +183,8 @@ let lie =
 ```
 
 Note:
-We can fix the error we got by moving module to the 
-top of the file before our imports and functions.
+We can fix the error we got by moving module above 
+the import in our file.
 Let's reload to see our next error.
 
 +++
@@ -227,12 +239,10 @@ So keep in mind the where block and the let for the rules we discuss next.
 
 #### Indentation Rules
 
-<ol>
- <li> Code implementations start at least 1 space after the function name on the following line </li>
- <li> Code blocks must spatially align </li>
- <li> New code blocks inside of other functions must be 1 space over to denote a new block </li>
- <li> For readability, may I recommend 2 spaces </li>
-</ol>
+- Code implementations start at least 1 space after the function name on the following line 
+- Code blocks must spatially align | 
+- New code blocks inside of other functions must be 1 space over to denote a new block |
+- For readability, may I recommend 2 spaces |
 
 Note:
 My most common one is not having enough spaces between my function name 
@@ -247,6 +257,27 @@ guards & let in expressions especially. Rule #3 should be specified
 to say that the implementation inside of new code blocks must be
 at least 1 space over & explain when a new code block is started.
 
++++
+#### Fix #2
+```haskell
+ruleBreaker :: Bool -> String
+rulebraker b = 
+  case b of
+    True -> "yeah this code doesn't follow the rules"
+    False -> "no broken rules here... " ++ truth
+      where truth = "sorry, that isn't true"
+
+let lie = 
+     "this code will compile fine"
+-- rulebraker b = 
+--   case b of
+--     True -> "yeah this code doesn't follow the rules"
+--       False -> "no broken rules here... " ++ truth
+--       where truth = "sorry, that isn't true"
+-- 
+-- let lie = 
+-- "this code will compile fine"
+```
 +++
 
 #### Indentation Fixed
@@ -336,6 +367,17 @@ to distinguish it from functions, but in
 Haskell everything is a function!
 
 +++
+#### Fix #3
+```haskell
+lie = 
+  "this code will compile fine"
+
+-- let lie = 
+--      "this code will compile fine"
+
+```
+
++++
 
 #### Functions at The Top Level
 ```haskell
@@ -418,6 +460,15 @@ between the 2.
 #### If you have a type signature,
 #### you must have a function implementation with it
 
++++
+#### Fix #4
+```haskell
+ruleBreaker :: Bool -> String
+ruleBreaker b = ... 
+
+-- ruleBreaker :: Bool -> String
+-- rulebraker b = ... 
+```
 +++
 
 #### Type signatures for functions that exist
@@ -509,6 +560,19 @@ you have to have a function called main. If for whatever reason
 you don't want to have a main function, just name your module
 anything else (that starts with a capital letter).
 
++++
+#### Fix #5
+```haskell
+module Main where
+
+main :: Int
+main = print "hello world"
+
+-- module Main where
+-- 
+-- mymain :: Int
+-- mymain = print "hello world"
+```
 +++
 
 #### main for Main
@@ -613,6 +677,17 @@ print has the type a to IO (). So we know we'll want to return IO ()
 The rule to use function main is that main must return IO of some type.
 It doesn't have to be IO (), but print has the return type of IO ().
 Let's change our type signature of main to IO ().
+
++++
+
+#### Fix #6
+```haskell
+main :: IO ()
+main = print "hello world"
+
+-- main :: Int
+-- main = print "hello world"
+```
 
 +++
 
