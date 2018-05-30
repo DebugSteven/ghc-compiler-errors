@@ -6,7 +6,15 @@
 #### @DebugSteven
 
 Note:
-Hi I’m J & I’m DebugSteven on Twitter if you’d like to follow me there. Today I'm going to talk about compiler errors by iterating over code examples & explaining why we get those errors & how to fix them. Over the last year I’ve become friends with the Glorious Glasgow Haskell Compilation System. For this presentation, I’ll be using GHC version 8.2.2. I started self studying Haskell after I completed my bachelor’s in Computer Science last year and I started a Haskell Book Club, here in Denver, in August. We completed the entire book 3 weeks ago. I struggled along with my fellow attendees to get my Haskell code working, which meant reading the error messages & trying to figure out what they mean. Working with the Haskell compiler errors can be really difficult because Haskell is very different from most other programming languages people are used to. But if you practice, like we’ll do today, you’ll be able to do it! & I’m hoping by the end of this talk you’ll have a better understanding of GHC’s errors!  
+Hi I’m J & I’m DebugSteven on Twitter if you’d like to follow me there. Today I'm going to talk about compiler errors by iterating over code examples & explaining why we get those errors & how to fix them. Over the last year I’ve become friends with the Glorious Glasgow Haskell Compilation System. For this presentation, I’ll be using GHC version 8.2.2.  
+
+---
+Picture of Haskell Book Club or The Book
+
+Note:
+I started self studying Haskell after I completed my bachelor’s in Computer Science last year and I started a Haskell Book Club, here in Denver, in August. We completed the entire book 3 weeks ago. I struggled along with my fellow attendees to get my Haskell code working, which meant reading the error messages & trying to figure out what they mean. Working with the Haskell compiler errors can be difficult because Haskell is very different from most other programming languages people are used to. But if you practice, like we’ll do today, you’ll be able to do it! & I’m hoping by the end of this talk you’ll have a better understanding of GHC’s errors! 
+
+Before we iterate through parse errors, definition errors, and type errors, I would like to talk about how errors manifest in our programs and how we respond when we see error messages.
 
 ---
 
@@ -14,8 +22,6 @@ Hi I’m J & I’m DebugSteven on Twitter if you’d like to follow me there. To
 
 ```haskell
 data Bool     = False | True
-data Char     = GHC.Types.C# GHC.Prim.Char#  
-data Int      = GHC.Types.I# GHC.Prim.Int# 
 data Ordering = LT | EQ | GT
 type String   = [Char]
 data (,) a b  = (,) a b      -- definition for a tuple
@@ -25,7 +31,21 @@ data [] a     = [] | a : [a] -- definition for a list
 ```
 
 Note:
-Most of the errors we occur when we program are type errors. These type errors can manifest in different ways. In dynamic languages for example, it's with runtimes errors. One of your most useful tools in that instance is peppering your program with print statements to figure out where the error is occuring & why. That's not really efficient though & there are several drawbacks. You can forget about your print statements later on. It's a slow feedback loop to figure out why your program isn't working. & it's subject to user error. In Haskell though, since we have types, like Bool, Int, String, & so on (& we aren’t putting undefined all over our program), we have greater confidence about what we will get out of our functions. The type signatures on our functions can help guide us to correct code & GHC will use the types to help point out where we’ve gone wrong too.
+Most of the errors we occur when we program are type errors. These type errors can appear in different ways. In dynamic languages for example, it's with runtimes errors. One of your most useful tools in that instance is peppering your program with print statements to figure out where the error is occuring & why. That's not really efficient though & there are several drawbacks. You can forget about your print statements later on. It's a slow feedback loop to figure out why your program isn't working. & it's subject to user error. In Haskell though, since we have types, like Bool, Int, String, & so on (& we aren’t putting undefined all over our program), we have greater confidence about what we will get out of our functions. The type signatures on our functions can help guide us to correct code & GHC will use the types to help point out where we’ve gone wrong too.
+
+---
+
+![IT-crowd](it_crowd.gif)
+
+Note:
+How do we typically respond when we see error messages though? I generally get frustrated. I just want to solve this program & have my program compile! The compiler is holding me back by preventing me from getting a program to run. I feel bad about getting this red highlighted text that says “hey you messed up here” and that Simon Peyton Jones is disappointed in me for getting a compiler error. There’s this human aspect to reading the text. I’ve definitely read the error messages in the voice of my mentors and have felt like not knowing how to fix it immediately or without thinking is a failing on my part. It isn’t though. Consider this instead.
+
+---
+
+![puzzle](puzzle.jpg)
+
+Note:
+Functional programming is like snapping a bunch of functions together to get the result you’re looking for. This is like solving any sort of puzzle. Think about putting a jigsaw puzzle together. I’ve personally never gotten angry while putting a jigsaw puzzle together. It’s a pretty fun activity! It’s usually clear when two pieces don’t fix together. So you just move on in your puzzle solving to get the puzzle completed. The error is unspoken & obvious just upon inspection of attempting to put the incorrect pieces together. You don’t usually just try to mash the pieces together & decide that solves your problem. That piece goes somewhere else! So now let’s rethink our feelings about the compiler.
 
 ---
 
@@ -34,19 +54,23 @@ Most of the errors we occur when we program are type errors. These type errors c
 <span style="font-size: 0.5em;">Drawing by [Lee Baillie](https://twitter.com/_lbaillie)</span>
 
 Note:
-However the trade off for that confidence we get with strong and static types is a picky, rule oriented compiler. You’re going to spend a little more time upfront trying to figure out how to fix compiler errors. This, in my opinion, is significantly better than spending your time trying to fix type errors after they're discovered at runtime. I like to think of GHC as a referee. They will tell you where the error occurred, what rule you broke & what was expected by the compiler. This is super helpful. You can read that error & then fix your code to adhere to the rules! 
+What if we had a puzzle referee, someone that told us our puzzle pieces aren’t fitting together? It isn’t always obvious looking at a program without compiling or running it that the code will or will not compile just fine. Haskell won’t let you mash functions and types that don’t go together because it is strongly and statically typed. We have greater confidence about what we will get out of functions because the GHC referee enforces the rules for putting together our program. So you will have to spend a little more time upfront to figure out how to fix the compiler errors, but, in my opinion, this is significantly better than spending your time fixing type errors after they’re discovered at runtime.
+GHC will tell you where the error occurred, what rule you broke & what was expected by the compiler. This is super helpful. You can read that error & then fix your code to adhere to the rules! So let’s celebrate getting compiler errors. They’re saving us time from debugging errors later on!
 
 ---
 
 #### Oh, The Kinds of Errors You'll See
 
 - Parse Errors |
+- Definition Errors |
 - Type Errors |
 
 Note:
-Parse errors are when we have broken a formatting rule or some convention enforced by the compiler.
+Now that we've talked about how to feel better about seeing error messages let's talk about the kinds of errors that we will encounter while we try to get our program working.
+Parse errors are when we have broken a formatting rule or some convention enforced by the compiler. Once we fix all of those we will get definition errors.
+Definition errors are when we are calling that function that isn't defined by us in our scope or the function hasn't been imported from another module. Once we fit all our definition errors we'll get type errors.
 Type errors are when we told the compiler we would do something via our types
-and we haven't followed through in our function. Let's take a look at parse errors first. 
+and we haven't followed through in our function. After you fix all those errors you'll get your program to run! Let's take a look at parse errors first. 
 
 ---
 
