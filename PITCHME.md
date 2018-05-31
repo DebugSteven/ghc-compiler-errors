@@ -264,10 +264,10 @@ So keep in mind the where block and the let for the rules we discuss next.
 - Code implementations start at least 1 space after the function name on the following line | 
 ```haskell
 rulebraker b = 
-  case b of
-    True -> "yeah this code doesn't follow the rules"
-    False -> "no broken rules here... " ++ truth
-      where truth = "sorry, that isn't true"
+    case b of
+      True -> "yeah this code doesn't follow the rules"
+      False -> "no broken rules here... " ++ truth
+        where truth = "sorry, that isn't true"
 ```
 @[1-2]()
 
@@ -894,7 +894,7 @@ constructor `Maybe` isn't in scope.
 
 +++
 
-![Hoogle](https://youtu.be/uUeKforfSQY)
+![Hoogle](https://www.youtube.com/watch?v=uUeKforfSQY)
 
 Note:
 Data.Maybe is part of the prelude so if you haven't turned that off you won't
