@@ -35,14 +35,14 @@ Most of the errors we occur when we program are type errors. These type errors c
 
 ---
 
-![IT-crowd](it_crowd.gif)
+?image=it_crowd.gif
 
 Note:
 How do we typically respond when we see error messages though? I generally get frustrated. I just want to solve this program & have my program compile! The compiler is holding me back by preventing me from getting a program to run. I feel bad about getting this red highlighted text that says “hey you messed up here” and that Simon Peyton Jones is disappointed in me for getting a compiler error. There’s this human aspect to reading the text. I’ve definitely read the error messages in the voice of my mentors and have felt like not knowing how to fix it immediately or without thinking is a failing on my part. It isn’t though. Consider this instead.
 
 ---
 
-![puzzle](puzzle.jpg)
+?image=puzzle.jpg
 
 Note:
 Functional programming is like snapping a bunch of functions together to get the result you’re looking for. This is like solving any sort of puzzle. Think about putting a jigsaw puzzle together. I’ve personally never gotten angry while putting a jigsaw puzzle together. It’s a pretty fun activity! It’s usually clear when two pieces don’t fix together. So you just move on in your puzzle solving to get the puzzle completed. The error is unspoken & obvious just upon inspection of attempting to put the incorrect pieces together. You don’t usually just try to mash the pieces together & decide that solves your problem. That piece goes somewhere else! So now let’s rethink our feelings about the compiler.
