@@ -894,7 +894,7 @@ constructor `Maybe` isn't in scope.
 
 +++
 
-![Hoogle](https://www.youtube.com/watch?v=uUeKforfSQY)
+![Hoogle](https://www.youtube.com/embed/uUeKforfSQY)
 
 Note:
 Data.Maybe is part of the prelude so if you haven't turned that off you won't
