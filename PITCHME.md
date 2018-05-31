@@ -33,17 +33,13 @@ data [] a     = [] | a : [a] -- definition for a list
 Note:
 Most of the errors we occur when we program are type errors. These type errors can appear in different ways. In dynamic languages for example, it's with runtimes errors. One of your most useful tools in that instance is peppering your program with print statements to figure out where the error is occuring & why. That's not really efficient though & there are several drawbacks. You can forget about your print statements later on. It's a slow feedback loop to figure out why your program isn't working. & it's subject to user error. In Haskell though, since we have types, like Bool, Int, String, & so on (& we aren’t putting undefined all over our program), we have greater confidence about what we will get out of our functions. The type signatures on our functions can help guide us to correct code & GHC will use the types to help point out where we’ve gone wrong too.
 
----
-
-?image=https://github.com/DebugSteven/ghc-compiler-errors/blob/master/it_crowd.gif
+---?image=https://github.com/DebugSteven/ghc-compiler-errors/blob/master/it_crowd.gif
 @title[it_crowd]
 
 Note:
 How do we typically respond when we see error messages though? I generally get frustrated. I just want to solve this program & have my program compile! The compiler is holding me back by preventing me from getting a program to run. I feel bad about getting this red highlighted text that says “hey you messed up here” and that Simon Peyton Jones is disappointed in me for getting a compiler error. There’s this human aspect to reading the text. I’ve definitely read the error messages in the voice of my mentors and have felt like not knowing how to fix it immediately or without thinking is a failing on my part. It isn’t though. Consider this instead.
 
----
-
-?image=https://github.com/DebugSteven/ghc-compiler-errors/blob/master/puzzle.jpg
+---?image=https://github.com/DebugSteven/ghc-compiler-errors/blob/master/puzzle.jpg
 @title[puzzle]
 
 Note:
