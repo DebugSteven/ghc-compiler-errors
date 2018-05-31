@@ -9,7 +9,7 @@ Note:
 Hi I’m J & I’m DebugSteven on Twitter if you’d like to follow me there. Today I'm going to talk about compiler errors by iterating over code examples & explaining why we get those errors & how to fix them. Over the last year I’ve become friends with the Glorious Glasgow Haskell Compilation System. For this presentation, I’ll be using GHC version 8.2.2.  
 
 ---
-![logo](haskell_logo.svg)
+![logo](haskell_logo.jpg)
 
 Note:
 I started self studying Haskell after I completed my bachelor’s in Computer Science last year and I started a Haskell Book Club, here in Denver, in August. We completed the entire book 3 weeks ago. I struggled along with my fellow attendees to get my Haskell code working, which meant reading the error messages & trying to figure out what they mean. Working with the Haskell compiler errors can be difficult because Haskell is very different from most other programming languages people are used to. But if you practice, like we’ll do today, you’ll be able to do it! & I’m hoping by the end of this talk you’ll have a better understanding of GHC’s errors! 
@@ -284,10 +284,10 @@ This rule applies for let in expressions, case of expressions, guards, & where b
 - New code blocks inside of other functions must be 1 space over to denote a new block |
 ```haskell
 rulebraker b = 
-  case b of
-    True -> "yeah this code doesn't follow the rules"
-    False -> "no broken rules here... " ++ truth
-      where truth = "sorry, that isn't true"
+    case b of
+      True -> "yeah this code doesn't follow the rules"
+      False -> "no broken rules here... " ++ truth
+        where truth = "sorry, that isn't true"
 ```
 @[2-3]()
 Note:
@@ -304,10 +304,10 @@ indication you will need to indent your next section.
 - Code blocks must spatially align | 
 ```haskell
 rulebraker b = 
-  case b of
-    True -> "yeah this code doesn't follow the rules"
-    False -> "no broken rules here... " ++ truth
-      where truth = "sorry, that isn't true"
+    case b of
+      True -> "yeah this code doesn't follow the rules"
+      False -> "no broken rules here... " ++ truth
+        where truth = "sorry, that isn't true"
 ```
 @[3-4]()
 Note:
@@ -894,7 +894,7 @@ constructor `Maybe` isn't in scope.
 
 +++
 
-![Hoogle](hoogle_maybe.flv)
+![Hoogle](https://youtu.be/uUeKforfSQY)
 
 Note:
 Data.Maybe is part of the prelude so if you haven't turned that off you won't
@@ -1117,8 +1117,11 @@ The deriving part at the end gives us Equality & the ability to print out the da
 ### Peano Numbers
 
 0 = Zero
+
 1 = Succ Zero
+
 2 = Succ (Succ Zero)
+
 and so on.
 
 Note:
