@@ -65,8 +65,11 @@ GHC will tell you where the error occurred, what rule you broke & what was expec
 
 Note:
 Now that we've talked about how to feel better about seeing error messages let's talk about the kinds of errors that we will encounter while we try to get our program working.
+ARROW
 Parse errors occur when we have broken a formatting rule or some convention enforced by the compiler. Once we fix all of those we will get definition errors.
+ARROW
 Definition errors occur when we are calling that function that isn't defined by us in our scope or the function hasn't been imported from another module. Once we fit all our definition errors we'll get type errors.
+ARROW
 Type errors occur when we told the compiler we would do something via our types
 and we haven't followed through in our function. After you fix all those errors you'll get your program to run! Let's take a look at parse errors first. 
 
@@ -824,7 +827,7 @@ to our fixed file!
 Onto Definition & Type Errors! 
 
 Note: 
-Assume the code we're looking at is in a file & we don't have the implicit prelude.
+Assume the code we're looking at is in a file & we're going to turn off the implicit prelude for our first example. I'll remind you to turn it back on afterwards.
 We'll continue using the REPL to check ourselves as we go!
 
 ---
@@ -904,6 +907,8 @@ data, `Maybe a` is a type constructor that takes one type argument and
 the possible values of `Maybe` are the data constructors `Nothing`
 and `Just a` where `a` is some type. So in our function, if we gave `safeHead` a 
 list of `Int`, the type of `a` would be an `Int`.
+
+Correction: Replace with highlighted pictures instead.
 
 +++
 
@@ -1126,7 +1131,9 @@ and so on.
 
 Note:
 The way to represent numbers that I just showed you is
-called Peano numbers.
+called Peano numbers. A problem like this is useful to look
+at because we get some practice to learn recursion & to build
+recursive datatypes.
 
 +++
 
@@ -1144,6 +1151,9 @@ integerToNat i = if i < 0
 Note:
 We have a function called integer to natural. It takes an `Integer` and 
 evaluates to a `Maybe Natural` because not all Integers are natural numbers.
+The set of natural numbers starts at 0 & increases.
+We have our base cases. We have a function that takes an argument i if our
+previous cases don't match and runs through our if then else.
 
 +++
 
@@ -1168,12 +1178,22 @@ Just (Succ (Just (Succ (Just (Succ Zero))))
 ```
 Note: 
 Is that what we want though? Let's look at the info for Maybe
+This was how I originally wrote the code when I was first attempting this
+problem. Usually when I run into a type mismatch error now it's because
+I haven't broken the problem down far enough.
 
 +++
 
 `data Maybe a = Nothing | Just a`
+`data Nat = Zero | Succ Nat`
 
 `Just (Succ (Succ (Succ Zero)))`
+
+Note:
+So let's break it down further.
+We want to wrap the number in a Just if it belongs to the set of natural numbers.
+We also want to actually build the number in Peano representation.
+
 
 +++
 
@@ -1189,6 +1209,12 @@ integerToNat i =
           f 1 = (Succ Zero)
           f n = (Succ (f(n-1)))
 ```
+
+Note:
+So in order to fix our type mismatch error & break our problem
+down further I've created a function local to the integer to nat
+function in our where that recursively builds the natural number
+& then wraps that value in a `Just`.
 
 ---
 
@@ -1243,15 +1269,15 @@ Here's how that function works.
 
 #### EnumFromTo Ordering
 ```haskell
-eftOrd :: Ordering -> Ordering -> [Ordering]
-eftOrd b e = 
+enumOrd :: Ordering -> Ordering -> [Ordering]
+enumOrd b e = 
   if b <= e
   then b : bs
   else []
-    where bs = eftOrd (succ b) 
+    where bs = enumOrd (succ b) 
 ```
 Note:
-Here is our attempt at the enumerate from to function.
+Here is our attempt at the enumerate from to function for the Ordering type.
 
 +++
 
@@ -1271,46 +1297,46 @@ eft.hs:10:12: error:
 +++
 
 ```haskell
-eftOrd :: Ordering -> Ordering -> [Ordering]
-eftOrd b e = 
+enumOrd :: Ordering -> Ordering -> [Ordering]
+enumOrd b e = 
   if b <= e
   then b : bs
   else []
-    where bs = eftOrd (succ b) 
+    where bs = enumOrd (succ b) 
 ```
 @[4,6]()
 Note:
 Why would `bs` expect another argument? Well, what is bs defined to do?
-bs is equal to eftOrd and the next value of b, but eftOrd takes 2 arguments!
-Ahh! So we need to either have the give eftOrd another argument in the definition
-for bs or we need to pass the argument to bs on line 5.
+bs is equal to enumOrd and the next value of b, but enumOrd takes 2 arguments!
+Ahh! So we need to either have the give enumOrd another argument in the definition
+for bs or we need to pass the argument to bs on line 4.
 
 +++
 
 ```haskell
-eftOrd :: Ordering -> Ordering -> [Ordering]
-eftOrd b e = 
+enumOrd :: Ordering -> Ordering -> [Ordering]
+enumOrd b e = 
   if b <= e
   then b : bs
   else []
-    where bs = eftOrd (succ b) e
+    where bs = enumOrd (succ b) e
 ```
 
 +++
 
 ```haskell
-eftOrd :: Ordering -> Ordering -> [Ordering]
-eftOrd b e = 
+enumOrd :: Ordering -> Ordering -> [Ordering]
+enumOrd b e = 
   if b <= e
   then b : (bs e)
   else []
-    where bs = eftOrd (succ b) 
+    where bs = enumOrd (succ b) 
 ```
 
 +++
 
 ```
-λ> eftOrd GT GT
+λ> enumOrd GT GT
 [GT*** Exception: Prelude.Enum.Ordering.succ: bad argument
 ```
 Note:
@@ -1322,12 +1348,12 @@ about writing code that can blow up when we run it.
 +++
 
 ```haskell
-eftOrd :: Ordering -> Ordering -> [Ordering]
-eftOrd b e  
+enumOrd :: Ordering -> Ordering -> [Ordering]
+enumOrd b e  
     | b < e = b : bs
     | b > e = []
     | b == e = [e] 
-      where bs = eftOrd (succ b) e
+      where bs = enumOrd (succ b) e
 ```
 
 Note:
