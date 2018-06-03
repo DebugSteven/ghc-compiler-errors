@@ -1,4 +1,4 @@
-module SortWrapper where
+module Sort where
 
 import Data.List (sort)
 

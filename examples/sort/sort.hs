@@ -1,3 +1,3 @@
-module Main where
+module Sort where
 
 sortWrapper xs = sort xs
