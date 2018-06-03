@@ -1332,6 +1332,16 @@ enumOrd b e =
   else []
     where bs = enumOrd (succ b) 
 ```
+Note:
+When I first attempted this problem I felt pretty overwhelmed by
+all the new things that were going on in this problem.
+I wasn't familiar the Ordering type. It was strange how
+the enumeration of the data constructors for the Ordering type worked.
+I was still getting use to the cons operator to append an element
+to a list and returning an empty list as the way to finish the recursive loop.
+It was also my first time using the successor function.
+That's a lot of new stuff! So I didn't really focus on the logic of the function
+while I was trying to figure out how all these pieces fit together.
 
 +++
 
@@ -1357,6 +1367,10 @@ enumOrd b e
 ```
 
 Note:
+So after my first attempt & understanding a little bit better how the
+types and functions were working together I was able to focus more on the logic.
+I found that the logic was easier to represent using a guard & writing
+out all the possibilities I would need to cover for this problem.
 I ended up writing this with a guard & you may find that using
 particular control structures for particular problems
 may make more sense to you and be more readable. I find that when
