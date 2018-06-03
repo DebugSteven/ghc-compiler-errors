@@ -897,18 +897,62 @@ constructor `Maybe` isn't in scope.
 
 +++
 
-![Hoogle](https://www.youtube.com/embed/uUeKforfSQY)
+#### Using Hoogle
+![hoogle_search](hoogle1.jpg)
 
 Note:
 Data.Maybe is part of the prelude so if you haven't turned that off you won't
-get an error for Maybe not being defined overall. However, let's read this 
-data declaration.
+get an error for Maybe not being defined. 
+
+Use can search for a particular type signature you're looking for a function to have
+as well as searching for type constructors, data constructors, functions, & so on.
++++
+
+#### Using Hoogle
+![hoogle_search_results](hoogle2.jpg)
+Note:
+This has information about Maybe, but this is the base library information.
+This has a lot of stuff in it & so we want to look at something more specific.
+
++++
+
+#### Using Hoogle
+![hoogle_search_module_result](hoogle3.jpg)
+Note:
+This is what we want to look at.
+
++++
+
+#### Using Hoogle
+![hoogle_module_name](hoogle4.jpg)
+Note:
+Module name you'll want to use to import it.
+
++++
+
+#### Using Hoogle
+![hoogle_data_declaration](hoogle5.jpg)
+Note:
+Type constructor & data constructors for Maybe
+
+However, let's read this data declaration.
 data, `Maybe a` is a type constructor that takes one type argument and
 the possible values of `Maybe` are the data constructors `Nothing`
 and `Just a` where `a` is some type. So in our function, if we gave `safeHead` a 
 list of `Int`, the type of `a` would be an `Int`.
++++
 
-Correction: Replace with highlighted pictures instead.
+#### Using Hoogle
+![hoogle_instance](hoogle6.jpg)
+Note:
+Typeclass instances for Maybe
+
++++
+
+#### Using Hoogle
+![hoogle_functions](hoogle7.jpg)
+Note:
+Functions defined in the Data.Maybe module
 
 +++
 
