@@ -935,11 +935,6 @@ Module name you'll want to use to import it.
 Note:
 Type constructor & data constructors for Maybe
 
-However, let's read this data declaration.
-data, `Maybe a` is a type constructor that takes one type argument and
-the possible values of `Maybe` are the data constructors `Nothing`
-and `Just a` where `a` is some type. So in our function, if we gave `safeHead` a 
-list of `Int`, the type of `a` would be an `Int`.
 +++
 
 #### Using Hoogle
@@ -982,7 +977,7 @@ Failed, no modules loaded.
 Note:
 This is another job for Hoogle. We haven't defined or imported the function head.
 If we go look this one up the function is defined in Data.List.
-So let's go ahead and import that.
+So let's go ahead & import that.
 
 +++
 
@@ -1000,7 +995,9 @@ which will be a type error.
 
 +++
 
-### Data Constructors & Type Constructors
+### Data Constructors 
+### & 
+### Type Constructors
 
 +++
 
@@ -1025,6 +1022,13 @@ Failed, no modules loaded.
 λ> :i Maybe
 data Maybe a = Nothing | Just a         -- Defined in ‘GHC.Base’
 ```
+Note:
+
+Let's read this data declaration.
+data, `Maybe a` is a type constructor that takes one type argument and
+the possible values of `Maybe` are the data constructors `Nothing`
+and `Just a` where `a` is some type. So in our function, if we gave `safeHead` a 
+list of `Int`, the type of `a` would be an `Int`.
 
 +++
 
@@ -1055,7 +1059,7 @@ safehead.hs:6:15: error:
       In the expression: Just head xs
       In an equation for ‘safeHead’: safeHead xs = Just head xs
     • Relevant bindings include
-        xs :: [a] (bound at examples/safehead.hs:6:10)
+        xs :: [a] (bound at safehead.hs:6:10)
         safeHead :: [a] -> Maybe a (bound at safehead.hs:5:1)
   |
 6 | safeHead xs = Just head xs
@@ -1113,10 +1117,10 @@ Let's compile this.
 +++
 
 ```
-λ> :l examples/sort.hs
-[1 of 1] Compiling Sort             ( examples/sort.hs, interpreted )
+λ> :l sort.hs
+[1 of 1] Compiling Sort             ( sort.hs, interpreted )
 
-examples/sort.hs:3:18: error:
+sort.hs:3:18: error:
     • Variable not in scope: sort :: t -> t1
     • Perhaps you meant ‘sqrt’ (imported from Prelude)
   |
