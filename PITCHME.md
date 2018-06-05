@@ -151,12 +151,12 @@ Here is the line that GHC is pointing us to in the error message.
 
 #### Top Of File
 
-- Language extensions are listed at the top of the file |
+- Language pragmas are listed at the top of the file |
 - Module name is declared above imports & code | 
 - Imported modules listed before functions |
 
 Note:
-Language extensions or pragmas are listed
+Language pragmas are listed
 at the top of your file & I personally like
 to have LANGUAGE in all uppercase because I like to yell as much as
 possible in my code.
@@ -1233,6 +1233,7 @@ I haven't broken the problem down far enough.
 +++
 
 `data Maybe a = Nothing | Just a`
+
 `data Nat = Zero | Succ Nat`
 
 `Just (Succ (Succ (Succ Zero)))`
